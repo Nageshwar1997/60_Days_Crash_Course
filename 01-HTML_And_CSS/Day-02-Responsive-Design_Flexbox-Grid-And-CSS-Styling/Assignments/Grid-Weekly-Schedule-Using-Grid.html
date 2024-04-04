@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid - Weekly Schedule Using Grid</title>
+    <style>
+      #conatiner {
+        width: 100%;
+        text-align: center;
+        background-color: rgb(212, 210, 208);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #grid {
+        border: 5px double black;
+        width: 90%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 10px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+      #grid > div {
+        width: 100%;
+        height: 50px;
+        border-radius: 25px;
+        border: transparent;
+        text-align: center;
+        line-height: 50px;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      .blue {
+        background-color: rgb(0, 170, 255);
+      }
+      .pink {
+        background-color: rgb(233, 150, 164);
+      }
+      .yellow {
+        background-color: rgb(237, 237, 69);
+      }
+      .green {
+        background-color: rgb(55, 235, 55);
+      }
+      .note {
+        grid-column: 1 / span 8;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="conatiner">
+      <h1>✨ Weekly Schedule ✨</h1>
+      <div id="grid">
+        <div class="blue day">Time</div>
+        <div class="pink day">Monday</div>
+        <div class="yellow day">Tuesday</div>
+        <div class="pink day">Wednesday</div>
+        <div class="yellow day">Thursday</div>
+        <div class="pink day">Friday</div>
+        <div class="yellow day">Saturday</div>
+        <div class="green day">Sunday</div>
+        <div class="blue">12:00 AM - 01:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">01:00 AM - 02:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">02:00 AM - 03:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">03:00 AM - 04:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">04:00 AM - 05:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">05:00 AM - 06:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">06:00 AM - 07:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">07:00 AM - 08:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">08:00 AM - 09:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">09:00 AM - 10:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">10:00 AM - 11:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">11:00 AM - 12:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">12:00 PM - 01:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">01:00 PM - 02:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">02:00 PM - 03:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">03:00 PM - 04:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">04:00 PM - 05:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">05:00 PM - 06:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">06:00 PM - 07:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">07:00 PM - 08:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">08:00 PM - 09:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">09:00 PM - 10:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">10:00 PM - 11:00 PM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue">11:00 PM - 12:00 AM</div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="pink"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="blue note" style="text-align: left">
+          <span style="padding-left: 25px">Note : </span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

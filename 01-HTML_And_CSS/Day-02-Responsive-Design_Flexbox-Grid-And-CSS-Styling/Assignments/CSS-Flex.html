@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flex</title>
+    <style>
+        #main{
+            width: 100%;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #sub_main{
+            width: 90%;
+            margin: 10px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: rgb(247, 247, 255);
+            border-radius: 16px;
+        }
+        .card{
+            padding: 10px;
+            border-radius: 16px;
+            margin: 10px auto;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 220px;
+            height: 160px;
+        }
+        img{
+            width: 64px;
+            height: 64px;
+        }
+        .title{
+            font-size: 25px;
+            margin-bottom: 0px;
+            color: #6b6b6b;
+        }
+        .purple_text{
+            color: #6E71CC;
+            font-weight: 700;
+            font-size: large;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1>Hiring Facts</h1>
+        <div id="sub_main">
+            <div class="card">
+                <img src="https://www.masaischool.com/images/hire-masai-grads/HiringFacts/hiring-facts-1.svg" alt="Logo">
+                <p class="title">Hiring Process</p>
+                <p class="purple_text">< 3 Days</p>
+            </div>
+            <div class="card">
+                <img src="https://www.masaischool.com/images/hire-masai-grads/HiringFacts/hiring-facts-2.svg" alt="Logo">
+                <p class="title">Offer Acceptance</p>
+                <p class="purple_text">90%</p>
+            </div>
+            <div class="card">
+                <img src="https://www.masaischool.com/images/hire-masai-grads/HiringFacts/hiring-facts-3.svg" alt="Logo">
+                <p class="title">Retention Rate</p>
+                <p class="purple_text">93%</p>
+            </div>
+            <div class="card">
+                <img src="https://www.masaischool.com/images/hire-masai-grads/HiringFacts/hiring-facts-4.svg" alt="Logo">
+                <p class="title">Hiring Partners</p>
+                <p class="purple_text">4000+</p>
+            </div>
+            <div class="card">
+                <img src="https://www.masaischool.com/images/hire-masai-grads/HiringFacts/hiring-facts-5.svg" alt="Logo">
+                <p class="title">Year Round Availability</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

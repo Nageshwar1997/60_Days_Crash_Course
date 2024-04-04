@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dummy Portfolio</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+      header {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+      nav {
+        background-color: #444;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      nav a, nav select {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        background-color: #444;
+        font-size: 16px;
+      }
+      section {
+        padding: 20px;
+        text-align: center;
+        margin: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        color: #333;
+      }
+      section div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      section img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+      
+      nav select {
+        display: none;
+      }
+      /* Medium Screen */
+      @media only screen and (min-width: 769px){
+        section {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        section img{
+          width: 45%;
+          margin-right: 20px;
+        }
+        
+      }
+      @media screen and (max-width: 768px){
+        nav a{
+          display: none;
+        }
+        nav select{
+          display: inline-block;
+          background-color: #555;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #777;
+          width: 100%;
+          box-sizing: border-box;
+          color: #fff;
+        }
+        
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 style="color: #00bcd4">My Portfolio</h1>
+    </header>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact Me</a>
+      <select>
+        <option value="#home">Home</option>
+        <option value="#education">Education</option>
+        <option value="#projects">Projects</option>
+        <option value="#skills">Skills</option>
+        <option value="#contact">Contact Me</option>
+      </select>
+    </nav>
+
+    <section id="home">
+      <div>
+        <img
+        src="./Images/Home.png"
+          alt="Home Image"
+        />
+      </div>
+      <div>
+        <h2 style="color: #4caf50">Home</h2>
+        <p>
+          This is a dummy description for the Home section. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit.
+        </p>
+      </div>
+    </section>
+
+    <section id="education">
+      <div>
+        <img
+        src="./Images/Education.jpeg"
+          alt="Education Image"
+        />
+      </div>
+      <div>
+        <h2 style="color: #e91e63">Education</h2>
+        <p>
+          This is a dummy description for the Education section. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div>
+        <img
+        src="./Images/Projects.jpeg"
+          alt="Projects Image"
+        />
+      </div>
+      <div>
+        <h2 style="color: #ffc107">Projects</h2>
+        <p>
+          This is a dummy description for the Projects section. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div>
+        <img
+        src="./Images/Skills.jpeg"
+          alt="Skills Image"
+        />
+      </div>
+      <div>
+        <h2 style="color: #9c27b0">Skills</h2>
+        <p>
+          This is a dummy description for the Skills section. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div>
+        <img
+        src="./Images/Contact.jpeg"
+          alt="Contact Image"
+        />
+      </div>
+      <div>
+        <h2 style="color: #2196f3">Contact Me</h2>
+        <p>
+          This is a dummy description for the Contact Me section. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit.
+        </p>
+      </div>
+    </section>
+
+    <iframe
+      frameborder="0"
+      scrolling="no"
+      style="background-color: transparent; border: 0px; display: none"
+    ></iframe>
+    <div
+      id="GOOGLE_INPUT_CHEXT_FLAG"
+      input=""
+      input_stat='{"tlang":true,"tsbc":true,"pun":true,"mk":true,"ss":true}'
+      style="display: none"
+    ></div>
+  </body>
+</html>
