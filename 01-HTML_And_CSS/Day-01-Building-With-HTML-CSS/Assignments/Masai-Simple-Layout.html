@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masai Simple Layout</title>
+    <style>
+      #images_container > img:nth-child(2) {
+        width: 85%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      #input_container {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+      }
+      #input_container > div {
+        display: flex;
+        justify-content: space-between;
+        margin: 3px 0px;
+      }
+      #input_container > div > input {
+        margin-right: 15px;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #000000;
+        text-align: left;
+        padding: 3px;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+      <div id="images_container">
+        <img
+          src="https://masai-course.s3.ap-south-1.amazonaws.com/resources/images/masai_logo.svg"
+          alt="Masai"
+        />
+        <img
+          src="https://masai-course.s3.ap-south-1.amazonaws.com/resources/images/masai_banner.jpg"
+          alt="Poster"
+        />
+      </div>
+      <p>We will be learning the following things this week:</p>
+      <div id="table_container">
+        <table>
+          <thead>
+            <tr>
+              <th>Day 1</th>
+              <th>Day 2</th>
+              <th>Day 3</th>
+              <th>Day 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Linux 1</td>
+              <td>HTML</td>
+              <td>Linux 2</td>
+              <td>Linux 3</td>
+            </tr>
+            <tr>
+              <td>GIT 1</td>
+              <td>CSS</td>
+              <td>GIT 2</td>
+              <td>Bootstrap</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>If you want to contact me, please fill in this form:</p>
+      <div id="input_container">
+        <div><label>Name :</label><input type="text" placeholder="Enter Name" /></div>
+        <div>
+          <label>Phone No : </label><input type="text" placeholder="Enter Phone Number" />
+        </div>
+        <div>
+          <label>Email Id : </label><input type="text" placeholder="Enter Email" />
+        </div>
+      </div>
+      <h4>The following things are important to be a programmer</h4>
+      <div id="list_container">
+        <ul>
+          <li>A problem solving mindset</li>
+          <li>Consistency</li>
+          <ul>
+            <li>Clean code</li>
+            <li>Through knowledge of core concepts</li>
+            <li>Readable code</li>
+          </ul>
+          <li>Speed</li>
+        </ul>
+      </div>
+  </body>
+</html>
