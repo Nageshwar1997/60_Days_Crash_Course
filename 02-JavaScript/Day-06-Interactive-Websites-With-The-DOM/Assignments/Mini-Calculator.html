@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Calculator</title>
+    <style>
+      #container {
+        border: 1px solid black;
+        padding: 50px;
+        width: 50%;
+        margin: auto;
+        & h1{
+          text-align: center;
+        }
+      }
+      #inputs {
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        & input {
+          width: 50%;
+          height: 30px;
+          border: 2px solid black;
+          border-radius: 5px;
+          text-align: center;
+        }
+      }
+      #buttons {
+        margin: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        & button {
+          width: 20%;
+          border: none;
+          height: 25px;
+          border-radius: 5px;
+          background-color: rgb(5, 230, 76);
+        }
+        & button:hover {
+          width: 26%;
+          transition: all 0.5s ease;
+          background-color: aqua;
+          border: 2px solid purple;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Mini Calculator</h1>
+      <div id="inputs">
+        <input type="number" placeholder="Enter 1st Number" />
+        <input type="number" placeholder="Enter 2nd Number" />
+      </div>
+      <div id="buttons">
+        <button>Add</button>
+        <button>Subtract</button>
+        <button>Multiply</button>
+        <button>Divide</button>
+      </div>
+      <h2>Result :</h2>
+    </div>
+  </body>
+  <script>
+    let sumBtn = document.querySelector("#buttons button:nth-child(1)");
+    let subBtn = document.querySelector("#buttons button:nth-child(2)");
+    let mulBtn = document.querySelector("#buttons button:nth-child(3)");
+    let divBtn = document.querySelector("#buttons button:nth-child(4)");
+
+    let num1 = document.querySelector("#inputs input:nth-child(1)");
+    let num2 = document.querySelector("#inputs input:nth-child(2)");
+
+    let result = document.querySelector("h2");
+
+    sumBtn.addEventListener("click", () => {
+      let sum = Number(num1.value) + Number(num2.value);
+      result.innerHTML = `Result : Addition of <span style="color:red">${num1.value}</span> and <span style="color:red">${num2.value}</span> is <span style="color:green">${sum}</span>.`;
+    //   console.log(sum);
+    });
+
+    subBtn.addEventListener("click", () => {
+      let sub = Number(num1.value) - Number(num2.value);
+      result.innerHTML = `Result : Subtraction of <span style="color:red">${num1.value}</span> and <span style="color:red">${num2.value}</span> is <span style="color:green">${sub}</span>.`;
+    //   console.log(sub);
+    })
+
+    mulBtn.addEventListener("click", () => {
+      let mul = Number(num1.value) * Number(num2.value);
+      result.innerHTML = `Result : Multiplication of <span style="color:red">${num1.value}</span> and <span style="color:red">${num2.value}</span> is <span style="color:green">${mul}</span>.`;
+      console.log(mul);
+    })
+
+    divBtn.addEventListener("click", () => {
+      let div = Number(num1.value) / Number(num2.value);
+      result.innerHTML = `Result : Division of <span style="color:red">${num1.value}</span> and <span style="color:red">${num2.value}</span> is <span style="color:green">${div}</span>.`;
+      console.log(div);
+    })
+  </script>
+</html>
