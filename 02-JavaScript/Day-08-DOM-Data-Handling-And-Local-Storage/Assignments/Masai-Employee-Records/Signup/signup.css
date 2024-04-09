@@ -1,0 +1,85 @@
+#signUp {
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 50%;
+  margin: 50px auto;
+  padding-bottom: 50px;
+  text-align: center;
+}
+h1 {
+  text-align: center;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #2b619e;
+  text-decoration: underline;
+}
+nav > div {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid transparent;
+  background-color: rgb(250, 250, 250);
+  margin: 5px auto;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  & > a {
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 500;
+    color: #2b619e;
+  }
+}
+nav > div:hover {
+  background-color: rgb(240, 240, 240);
+  border: 1px solid rgb(200, 200, 200);
+}
+
+form {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 40%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 15px 30px;
+  border-radius: 8px;
+}
+label {
+  font-size: 20px;
+  color: #2b619e;
+}
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+input[type="submit"] {
+  background-color: #2b619e;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 20px;
+}
+input[type="submit"]:hover {
+  background-color: #3973b6;
+}
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}

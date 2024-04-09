@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="signin.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="signIn">
+      <h1>Sign In</h1>
+      <nav>
+        <div id="signup">
+          <a href="../Signup/signup.html">Sign Up</a>
+        </div>
+      </nav>
+      <div>
+        <form id="signinForm">
+          <label for="name">Name</label><br />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter Name"
+          /><br />
+          <label for="role">Role</label><br />
+          <select id="role" name="role">
+            <option value="">Select Role</option>
+            <option value="HR">HR</option>
+            <option value="Employee">Employee</option></select
+          ><br />
+          <label for="password">Password</label><br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter Password"
+          /><br />
+          <input type="submit" value="Signin" />
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="signin.js"></script>
+</html>
