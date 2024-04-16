@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem 02</title>
+  </head>
+  <body>
+    <h1>Set Time Interval</h1>
+  </body>
+  <script>
+    var a = 10;
+    let b = 20;
+
+    function parent(callback) {
+      let sum = a + b;
+    //   console.log(callback);
+      let call = callback(sum);
+      console.log(call);
+    }
+
+    function print(value) {
+      return value * 10;
+    }
+
+    parent(print);
+  </script>
+</html>
