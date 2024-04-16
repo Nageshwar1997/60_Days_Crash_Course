@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slide Show</title>
+    <style>
+      #container {
+        width: 50%;
+        margin: auto;
+        padding: 20px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px black;
+        & > #buttons {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 20px;
+          & > button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            font-size: 20px;
+            font-weight: 400;
+          }
+          & > button:hover {
+            cursor: pointer;
+            border: 1px solid lightskyblue;
+            box-shadow: 0 0 5px lightskyblue;
+          }
+        }
+        & > #imagesContainer {
+          width: 100%;
+          & > img {
+            width: 100%;
+            height: auto;
+            margin: 20px auto 0 auto;
+            border-radius: 10px;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="buttons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+      </div>
+      <div id="imagesContainer"></div>
+    </div>
+    <script>
+      let imagesArr = [
+        "https://img.uhdpaper.com/wallpaper/eagle-burning-digital-art-bird-animal-126@3@a-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/eagle-flying-animal-bird-237@3@a-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/kingfisher-bird-animal-235@3@a-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/eagle-art-bird-animal-127@3@a-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/eagle-flying-bird-237@0@j-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/white-owl-flying-bird-240@0@j-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/flying-eagle-bird-246@0@j-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/flying-eagle-bird-246@0@j-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/bird-animal-245@0@j-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/colorful-bird-animal-digital-art-929@0@i-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/parrot-bird-animal-842@1@m-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/white-owl-bird-animal-891@1@m-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/white-owl-digital-art-538@0@i-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/owl-bird-background-ai-art-17@0@i-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/owl-background-birds-animals-155@0@e-thumb.jpg?dl",
+        "https://img.uhdpaper.com/wallpaper/raven-birds-animals-133@0@e-thumb.jpg?dl",
+        "https://img.uhdpaper.com/image-4/a/thumbnail/parrot-birds-crimson-rosella-4k--31.4_a.jpg",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhief9usewBzPU_kK6UFt9T4ZcCuqQfexLuCFA8VRzb4Y0TY3iIMOPJu9i3q7DPB05FFxWqc9_W5ExJtRVxY2nvSVIIyFlye9SGaYZDX7xIl7h6efAkuBq5nIhXDuC6mnT-4yCDKhfLE-ZB/w348-h195-p-k-no-nu/kingfisher-bird-uhdpaper.com-4K-8.3229-wp.thumbnail.jpg",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkNQVbfDaNnaKc_uKH5WR3m_ILONk6TRwoLal3roWzX3kax87YJqkyNgVY4T0jG2PoYtXuL-6lueIgYU8z5sKzoyn5ejYwoWZEQJT96c15-tO08C43jaDJKLT_xkcCx51Tk8StamCQMyuu/w348-h195-p-k-no-nu/swan-uhdpaper.com-4K-8.3238-wp.thumbnail.jpg",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1lc9ZKfM0ssqdVjiS8NvUbFx5JmzO9LuIxhmh1gHDUAG5_B4fHMSUizYDn_4oetZUPTbXy4f0dfPfybgyarKMgpisaM1regZIDxwwoo6A_hl1RklA3GFbWAOmb8XnbEm38bGT5GWKvQ2A/w348-h195-p-k-no-nu/eagle-flying-bird-picture-animal-uhdpaper.com-4K-4.3354-wp.thumbnail.jpg",
+      ];
+
+      console.log(imagesArr.length);
+
+      let imageContainer = document.querySelector("#imagesContainer");
+      function showImage(imgUrl) {
+        let img = document.createElement("img");
+        img.src = imgUrl;
+        img.alt = "image";
+        img.classList.add("image");
+        imageContainer.appendChild(img);
+      }
+
+      let index = 0;
+
+      let start = document.querySelector("#start");
+      let stop = document.querySelector("#stop");
+      let next = document.querySelector("#next");
+      let prev = document.querySelector("#prev");
+
+      next.addEventListener("click", function () {
+        imageContainer.innerHTML = "";
+        showImage(imagesArr[index]);
+        index++;
+        if (index == imagesArr.length) {
+          index = 0;
+        }
+      });
+
+      prev.addEventListener("click", function () {
+        imageContainer.innerHTML = "";
+        showImage(imagesArr[index]);
+        index--;
+        if (index < 0) {
+          index = imagesArr.length - 1;
+        }
+      });
+      let interval;
+      start.addEventListener("click", function () {
+        interval = setInterval(function () {
+          imageContainer.innerHTML = "";
+          showImage(imagesArr[index]);
+          index++;
+          if (index == imagesArr.length) {
+            index = 0;
+          }
+        }, 2000);
+      });
+
+      stop.addEventListener("click", function () {
+        clearInterval(interval);
+      });
+    </script>
+  </body>
+</html>
