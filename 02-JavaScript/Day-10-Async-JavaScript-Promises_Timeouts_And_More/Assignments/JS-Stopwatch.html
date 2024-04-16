@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <style>
+      .container {
+        text-align: center;
+        margin-top: 50px;
+        border: 1px solid black;
+        width: 30%;
+        margin: 50px auto;
+        & > div {
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+      #display {
+        font-size: 40px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: 10px 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Stopwatch</h1>
+      <h1 id="display">00:00:00</h1>
+      <div>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resetBtn"">Reset</button>
+      </div>
+    </div>
+    <script>
+      let startBtn = document.getElementById("startBtn");
+      let stopBtn = document.getElementById("stopBtn");
+      stopBtn.style.display = "none";
+      let resetBtn = document.getElementById("resetBtn");
+      let display = document.getElementById("display")
+
+      let timer;
+      let hours = 0;
+      let minutes = 0;
+      let seconds = 0;
+
+      startBtn.addEventListener("click", function () {
+        timer = setInterval(updateStopwatch, 1000);
+        startBtn.style.display = "none";
+        stopBtn.style.display = "block";
+      });
+
+      stopBtn.addEventListener("click", function () {
+        clearInterval(timer);
+        timer = null;
+        startBtn.style.display = "block";
+        stopBtn.style.display = "none";
+      });
+      resetBtn.addEventListener("click", function () {
+          clearInterval(timer);
+        timer = null;
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        display.innerText = "00:00:00";
+      })
+
+      function updateStopwatch() {
+        seconds++;
+
+        if (seconds === 60) {
+          minutes++;
+          seconds = 0;
+        }
+        if (minutes === 60) {
+          hours++;
+          minutes = 0;
+        }
+
+        let displayTime = hours + ":" + minutes + ":" + seconds;
+        if (hours === 0 && minutes === 0) {
+          displayTime = seconds;
+        } else if (hours === 0) {
+          displayTime = minutes + ":" + seconds;
+        } else {
+          displayTime = hours + ":" + minutes + ":" + seconds;
+        }
+
+        display.innerText = displayTime;
+      }
+    </script>
+  </body>
+</html>
