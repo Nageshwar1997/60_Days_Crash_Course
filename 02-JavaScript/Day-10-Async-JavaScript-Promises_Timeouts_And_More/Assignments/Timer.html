@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        #container{
+            border: 1px solid black;
+            width: 40%;
+            margin: auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0px 20px 20px 20px;
+            border-radius: 5px;
+            margin-top: 50px;
+            & > #inputs {
+                & > input{
+                    width: 60px;
+                    height: 20px;
+                    border-radius: 3px;
+                    margin-right: 10px;
+                    border: 1px solid transparent;
+                    font-size: 10px;
+                    text-align: center;
+                    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                }
+                & > input:hover{
+                    border: 1px solid lightgreen;
+                    font-size: 11px;
+                }
+            }
+            & > #buttons {
+                & > button{
+                    background-color: rgb(240, 232, 232);
+                    border: 1px solid transparent;
+                    padding: 5px 10px;
+                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                    margin-right: 20px;
+                    border-radius: 3px;
+                }
+                & > button:hover{
+                    border: 1px solid rgb(30, 191, 216);
+                    background-color: lightblue;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div>
+            <h1>Timer</h1>
+            <h3><span><span id="hour">HH</span>:<span id="min">MM</span>:<span id="sec">SS</span></h3>
+        </div>
+            <div id="inputs">
+            <input type="number" id="hours" placeholder="Hours">
+            <input type="number" id="minutes" placeholder="Minutes">
+            <input type="number" id="seconds" placeholder="Seconds">
+        </div>
+        <div id="buttons">
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+</body>
+<script>
+    let start = document.getElementById("start");
+    let pause = document.getElementById("pause");
+    let reset = document.getElementById("reset");
+
+    let hours = document.getElementById("hours");
+    let minutes = document.getElementById("minutes");
+    let seconds = document.getElementById("seconds");
+
+    let hour = document.getElementById("hour");
+    let min = document.getElementById("min");
+    let sec = document.getElementById("sec");
+
+    let timer;
+    let h = "HH";
+    let m = "MM";
+    let s = "SS";
+
+
+    start.addEventListener("click", function () {
+        if (hours.value == 0 && minutes.value == 0 && seconds.value == 0) {
+            alert("Please Valid Time");
+            return;
+        }
+        else {
+
+            h = +hours.value;
+            m = +minutes.value;
+            s = +seconds.value;
+                startTimer();
+                disableInputs();
+        }
+    })
+
+    function startTimer() {
+        timer = setInterval(function () {
+            s--;
+            if (s < 0) {
+                s = 59;
+                m--;
+            }
+            if (m < 0) {
+                m = 59;
+                h--;
+            }
+            if (h < 0) {
+                h = 0;
+                m = 0;
+                s = 0;
+                clearInterval(timer);
+            }
+
+            hour.textContent = (h < 10) ? "0" + h : h;
+            min.textContent = (m < 10) ? "0" + m : m;
+            sec.textContent = (s < 10) ? "0" + s : s;
+        }, 100);
+    }
+    pause.addEventListener("click", function () {
+        clearInterval(timer);
+        hours.value = h;
+        minutes.value = m;
+        seconds.value = s;
+        disableInputs();
+    })
+    reset.addEventListener("click", function () {
+        clearInterval(timer);
+        hour.textContent = "HH";
+        min.textContent = "MM";
+        sec.textContent = "SS";
+        hours.value = "";
+        minutes.value = "";
+        seconds.value = "";
+        enableInputs();
+    });
+
+    function disableInputs() {
+        hours.disabled = true;
+        minutes.disabled = true;
+        seconds.disabled = true;
+    }
+
+    function enableInputs() {
+        hours.disabled = false;
+        minutes.disabled = false;
+        seconds.disabled = false;
+    }
+
+    hour.textContent = (h < 10) ? "0" + h : h;
+    min.textContent = (m < 10) ? "0" + m : m;
+    sec.textContent = (s < 10) ? "0" + s : s;
+</script>
+
+</html>
