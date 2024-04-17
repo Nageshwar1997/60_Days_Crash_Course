@@ -1,0 +1,35 @@
+#container {
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+
+    &>#usersContainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        padding: 10px;
+
+        &>.card {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            font-size: 18px;
+            border-radius: 8px;
+            &>img {
+                width: 200px;
+                margin-top: 10px;
+                border-radius: 5px;
+            }
+
+            & a {
+                text-decoration: none;
+            }
+        }
+    }
+
+    &>button {
+        width: 120px;
+        height: 30px;
+        margin-bottom: 10px;
+    }
+}
