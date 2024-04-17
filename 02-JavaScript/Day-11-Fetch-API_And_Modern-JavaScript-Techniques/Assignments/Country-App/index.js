@@ -42,17 +42,12 @@ function showCountries(arr) {
 let select = document.getElementById("select");
 
 select.addEventListener("change", (e) => {
-  if (e.target.value == "ascending") {
-    arr.sort((a, b) => {
-      return a.population - b.population;
-    });
-    showCountries(arr);
-} else if (e.target.value == "descending") {
-    arr.sort((a, b) => {
-        return b.population - a.population;
-    });
-    showCountries(arr);
+  if (e.target.value == "asc") {
+    url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries?sort=population&order=${e.target.value}`;
+  } else if (e.target.value == "desc") {
+    url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries?sort=population&order=${e.target.value}`;
   }
+  fetchCountries(url);
 })
 
 function formatPopulation(number) {
