@@ -1,0 +1,24 @@
+#container{
+    grid-area: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    & > .card{
+        padding-left: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 5px;
+    }
+}
+#header{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    margin: 15px auto;
+    & > select{
+        width: 50%;
+        height: 30px;
+        border-radius: 3px;
+    }
+}
