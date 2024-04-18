@@ -1,0 +1,48 @@
+#root {
+    width: 100%;
+    margin: auto;
+    border: 1px solid black;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h4 {
+    text-transform: capitalize;
+    color: green;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+header {
+    width: 100%;
+    margin: auto;
+}
+
+nav {
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+li {
+    list-style: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgb(180, 176, 176);
+    padding: 10px;
+    background-color: #d7d8d9;
+
+    &>a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 12px;
+    }
+}
+
+li:hover {
+    background-color: #b2c5dc;
+}
