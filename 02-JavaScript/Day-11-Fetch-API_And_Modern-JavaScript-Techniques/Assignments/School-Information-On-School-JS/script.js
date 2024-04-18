@@ -32,7 +32,8 @@ const school = {
   ],
 };
 
-// Problem 10: countCalculation [1]
+// Problem 10: countCalculation
+// Function to count the number of teachers and students in math and history departments.
 function countCalculation(school) {
   const { departments } = school;
   const { math, history } = departments;
@@ -45,9 +46,10 @@ function countCalculation(school) {
   };
 }
 
-// console.log(countCalculation(school));
+console.log(countCalculation(school));
 
-// Problem 11: findTopStudent [1]
+// Problem 11: findTopStudent
+// Function to find the top student in a given course.
 function findTopStudent(school, courseName) {
   let topScore = -Infinity;
   let topStudent = {};
@@ -66,11 +68,12 @@ function findTopStudent(school, courseName) {
 }
 
 console.log(findTopStudent(school, "math"));
-// console.log(findTopStudent(school, "science"));
-// console.log(findTopStudent(school, "history"));
-// console.log(findTopStudent(school, "english"));
+console.log(findTopStudent(school, "science"));
+console.log(findTopStudent(school, "history"));
+console.log(findTopStudent(school, "english"));
 
-// Problem 12: addNewDept [1]
+// Problem 12: addNewDept
+// Function to add a new department to the school.
 function addNewDept(school, newDepartment) {
   return {
     ...school,
@@ -78,10 +81,11 @@ function addNewDept(school, newDepartment) {
   };
 }
 
-// console.log(addNewDept(school, { dance: { teachers: 2, students: 50 } }));
-// console.log(addNewDept(school, { music: { teachers: 4, students: 100 } }));
+console.log(addNewDept(school, { dance: { teachers: 2, students: 50 } }));
+console.log(addNewDept(school, { music: { teachers: 4, students: 100 } }));
 
-// Problem 13: highestStudentCountDepartment[1]
+// Problem 13: highestStudentCountDepartment
+// Function to find the department with the highest number of students.
 function highestStudentCountDepartment(school) {
   const { departments } = school;
 
@@ -97,9 +101,10 @@ function highestStudentCountDepartment(school) {
   return maxStudentDept;
 }
 
-// console.log(highestStudentCountDepartment(school));
+console.log(highestStudentCountDepartment(school));
 
-// Problem 14: Greeting Message [1]
+// Problem 14: Greeting Message
+// Function to generate a greeting message in different languages.
 function generateGreeting(name, language = "English") {
   let greetings = {
     English: `Hello, ${name}!`,
@@ -110,9 +115,9 @@ function generateGreeting(name, language = "English") {
   return greetings[language];
 }
 
-// console.log(generateGreeting("Alice"));
-// console.log(generateGreeting("Bob", "Spanish"));
-// console.log(generateGreeting("Charlie", "French"));
+console.log(generateGreeting("Alice"));
+console.log(generateGreeting("Bob", "Spanish"));
+console.log(generateGreeting("Charlie", "French"));
 
 // Rendering HTML
 let container = document.getElementById("container");
@@ -125,10 +130,12 @@ let highestStudentCountDepartmentBtn = document.getElementById(
 );
 let greetingMessageBtn = document.getElementById("greetingMessagebtn");
 
+// Event listener for the countCalculationBtn
 countCalculationBtn.addEventListener("click", function () {
   container.innerHTML = "";
   let result = countCalculation(school);
 
+  // Creating card to display the result
   let card = document.createElement("div");
   card.className = "card";
 
@@ -145,7 +152,9 @@ countCalculationBtn.addEventListener("click", function () {
   container.append(card);
 });
 
+// Event listener for the findTopStudentBtn
 findTopStudentBtn.addEventListener("click", function () {
+  // Function to find the highest scored subject
   function findHighestScoredSubject(result) {
     let maxScore = -Infinity;
     let maxScoreSubject = "";
@@ -159,6 +168,7 @@ findTopStudentBtn.addEventListener("click", function () {
     return `<p>Highest Scored Subject : <strong>${maxScoreSubject}</strong></p>`;
   }
 
+  // Function to display the result
   function showResult(result) {
     let resultCard = document.createElement("div");
     resultCard.className = "resultCard";
@@ -193,6 +203,7 @@ findTopStudentBtn.addEventListener("click", function () {
   container.innerHTML = null;
   let result = findTopStudent(school, "math");
 
+  // Creating card to display the result
   let card = document.createElement("div");
   card.className = "card";
 
@@ -208,6 +219,7 @@ findTopStudentBtn.addEventListener("click", function () {
   container.append(card);
 });
 
+// Event listener for the addNewDeptBtn
 addNewDeptBtn.addEventListener("click", function () {
   function addNewDept(school, newDept) {
     let { departments } = school;
@@ -245,6 +257,7 @@ addNewDeptBtn.addEventListener("click", function () {
   container.append(card);
 });
 
+// Event listener for the highestStudentCountDepartmentBtn
 highestStudentCountDepartmentBtn.addEventListener("click", function () {
   function highestStudentCountDepartment(result) {
     let maxCount = -Infinity;
@@ -276,9 +289,9 @@ highestStudentCountDepartmentBtn.addEventListener("click", function () {
   container.append(card);
 });
 
-
+// Event listener for the greetingMessageBtn
 greetingMessageBtn.addEventListener("click", function () {
-  function greetingMessage(name , language="English") {
+  function greetingMessage(name, language = "English") {
     let message = "";
 
     switch (language) {
@@ -294,7 +307,7 @@ greetingMessageBtn.addEventListener("click", function () {
         message = `Hello, ${name}!`;
         break;
     }
-    
+
     return message;
   }
 
@@ -312,4 +325,4 @@ greetingMessageBtn.addEventListener("click", function () {
     `;
 
   container.append(card);
-})
+});
