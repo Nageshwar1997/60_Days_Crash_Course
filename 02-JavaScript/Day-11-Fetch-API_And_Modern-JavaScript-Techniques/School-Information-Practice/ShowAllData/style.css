@@ -46,3 +46,7 @@ li {
 li:hover {
     background-color: #b2c5dc;
 }
+pre{
+    padding: 20px;
+    text-align: justify;
+}
