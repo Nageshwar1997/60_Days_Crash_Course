@@ -1,0 +1,17 @@
+#products_container{
+    border: 1px solid black;
+    width: 95%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding: 10px;
+}
+
+#products_container > div{
+    border: 1px solid black;
+    padding: 10px;
+    width: 100%;
+    & > img{
+
+    }
+}
