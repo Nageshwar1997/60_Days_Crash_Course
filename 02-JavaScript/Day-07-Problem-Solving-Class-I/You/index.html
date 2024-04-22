@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div id="container">
-        <div id="products_container"></div>
-        
+      <div id="navbar">
+        <input type="text" placeholder="Search By Title" />
+        <button id="navbar_search">🔍</button>
+        <br />
+        <select>
+          <option value="low_to_high">Low To High</option>
+          <option value="high_to_low">High To Low</option>
+        </select>
+        <form>
+          <input type="text" placeholder="Product's Title" />
+          <input type="text" placeholder="Product's Description" />
+          <input type="text" placeholder="Product's Image Link" />
+          <input type="number" placeholder="Product's Price" />
+          <input type="submit" value="Add Product" />
+        </form>
+      </div>
+      <div id="products_container"></div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
