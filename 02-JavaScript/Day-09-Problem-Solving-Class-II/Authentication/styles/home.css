@@ -1,0 +1,10 @@
+#navbar{
+    display: flex;
+    justify-content: space-around;
+    background-color: blueviolet;
+    width: 100%;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}

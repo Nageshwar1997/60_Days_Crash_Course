@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <button>Login Page</button>
+</body>
+<script>
+    let btn = document.querySelector("button");
+
+    btn.addEventListener("click",()=>{
+        window.location.href = "login.html"
+        localStorage.setItem("string", "Hello World");
+    })
+</script>
+</html>
