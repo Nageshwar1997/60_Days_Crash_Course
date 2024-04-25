@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Problem 01</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Problem 01</h1>
-</body>
-<script>
-    
-</script>
+  </body>
+  <script>
+    var a = 10;
+    let b = 20;
+    let c;
+
+    function add(a, b, c) {
+      return a + b + c;
+    }
+
+    let res1 = add(a, b, c);
+    // console.log(res1); // NaN
+
+    c = 30;
+
+    let res2 = add(a, b, c);
+    // console.log(res2); // 60
+
+    console.log("Hello");
+
+    for (let i = 0; i <= 1000000000; i++) {
+      // this is a very big number and it will take some time to print 
+    }
+
+    console.log("World");
+  </script>
 </html>

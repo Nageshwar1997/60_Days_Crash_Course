@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise 02</title>
+  </head>
+  <body>
+    Promise 02
+  </body>
+  <script>
+    function getData() {
+      return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          let data = [{ name: "Nageshwar", matches: 125 }];
+          resolve(data);
+        }, 4000);
+      });
+    }
+
+    function readData(arr) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(arr[0]);
+        }, 2000);
+      });
+    }
+
+    function printData(name) {
+      console.log(name);
+    }
+
+    // console.log(getData());
+    getData().then((data) => {
+      readData(data).then((value) => {
+        printData(value.name);
+      });
+    });
+  </script>
+</html>

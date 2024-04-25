@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem 06</title>
+  </head>
+  <body>
+    Problem 06
+  </body>
+  <script>
+    function getData(callbackRead) {
+      setTimeout(() => {
+        let data = [{ name: "Nageshwar", matches: 125 }];
+        callbackRead(data);
+      }, 4000);
+    }
+
+    function readData(arr, callbackPrint) {
+      setTimeout(() => {
+        callbackPrint(arr[0]);
+      },2000)
+    }
+
+    function printData(value) {
+      console.log(value);
+    }
+
+    getData((data)=>{
+      readData(data, printData);
+    });
+
+    // Know more about it please refer Promise02.html
+  </script>
+</html>

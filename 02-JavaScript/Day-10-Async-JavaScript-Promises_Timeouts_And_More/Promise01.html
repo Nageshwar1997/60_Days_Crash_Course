@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise 01</title>
+  </head>
+  <body>
+    Promise 01
+  </body>
+  <script>
+    let myPromise1 = new Promise(function (resolve, reject) {});
+
+    // console.log(myPromise1); // pending
+
+    let myPromise2 = new Promise(function (resolve, reject) {
+      let flag = true;
+      if (flag) {
+        resolve("Promise Resolved");
+      } else {
+        reject("Promise Rejected");
+      }
+    })
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+    let myPromise3 = new Promise(function (resolve, reject) {
+      let flag = false;
+      if (flag) {
+        resolve("Promise Resolved");
+      } else {
+        reject("Promise Rejected");
+      }
+    })
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  </script>
+</html>

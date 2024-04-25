@@ -1,35 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Callback Hell</title>
-</head>
-<body>
-    <h1>Callback Hell</h1>
-</body>
-<script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem 06</title>
+  </head>
+  <body>
+    <h1>Problem 06</h1>
+  </body>
+  <script>
+    let i = 0;
+    function printer() {
+      console.log("hello", i);
+      i++;
+      if(i==5){
+          clearInterval(intervalId);
+          console.log("Code Ended");
+      }
 
-    function getData(cb) {
-        setTimeout(() => {
-            let data = [{name:"Nageshwar", matches:125}]
-            cb(data);
-        },4000)
     }
 
-    function readData(arr, callbackPrint) {
-        setTimeout(() => {
-            let arrValue = arr[0].name
-            callbackPrint(arrValue);
-        }, 2000);
-    }
-
-    function printData(value) {
-        console.log(value, "Hello");
-    }
-
-    getData(function(arr){
-        readData(arr, printData);
-    });
-</script>
+    let intervalId = setInterval(printer, 2000);
+    
+  </script>
 </html>
