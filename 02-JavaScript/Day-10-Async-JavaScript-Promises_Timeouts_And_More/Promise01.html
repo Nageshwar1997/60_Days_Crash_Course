@@ -21,15 +21,15 @@
         reject("Promise Rejected");
       }
     })
-      .then(function (res) {
-        console.log(res);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+      // .then(function (res) {
+      //   console.log(res);
+      // })
+      // .catch(function (err) {
+      //   console.log(err);
+      // });
 
     let myPromise3 = new Promise(function (resolve, reject) {
-      let flag = false;
+      let flag = true;
       if (flag) {
         resolve("Promise Resolved");
       } else {
@@ -41,6 +41,10 @@
       })
       .catch(function (err) {
         console.log(err);
-      });
+      }).finally(function () {
+        // it is always executed but it is not dependent on the result of the promise
+        // it is optional to use
+        console.log("Finally block called both resolve and reject");
+      })
   </script>
 </html>
