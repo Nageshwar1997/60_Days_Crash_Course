@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Server</title>
+    <style>
+        img{
+            width: 150px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>JSON Server</h1>
+    <button id="adminBtn">Admin Page</button>
+    <div id="root"></div>
+  </body>
+  <script>
+    let container = document.getElementById("root");
+    let adminBtn = document.getElementById("adminBtn");
+    let data = [];
+    async function getData(URL) {
+      try {
+        let resp = await fetch(URL);
+        data = await resp.json();
+        // console.log(data);
+        showData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getData("http://localhost:3000/products");
+
+    function showData(arr) {
+      container.innerHTML = "";
+      arr.forEach((product, index) => {
+        let div = document.createElement("div");
+        let title = document.createElement("p");
+        title.innerText = product.title;
+
+        let price = document.createElement("p");
+        price.innerText = product.price;
+
+        let img = document.createElement("img");
+        img.src = product.imageUrl;
+        img.alt = product.title;
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
+        deleteBtn.addEventListener("click", () => {
+          handleDelete(product.id);
+        });
+
+        
+        div.append(img, title, price,deleteBtn);
+        container.append(div);
+      });
+    }
+
+    adminBtn.addEventListener("click", () => {
+        window.location.href = "admin.html"
+    })
+
+    function handleDelete(id) {
+
+        fetch(`http://localhost:3000/products/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+            
+        })
+        data.splice(id, 1);
+        showData(data);
+    }
+    
+  </script>
+</html>

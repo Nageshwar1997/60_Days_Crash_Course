@@ -1,0 +1,23 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "laptop, hp, 32GB Ram",
+      "price": "70,000",
+      "imageUrl": "https://i5.walmartimages.com/asr/35b47efa-88ba-46ab-9faa-71096e67aed7.a7275eab204a8d8dc3d7949f0dbe74cc.jpeg"
+    },
+    {
+      "id": "0.7675576234742523",
+      "title": "Vivo T3X 5G (Caletial Green, 128GB)",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/k/g/j/t3x-5g-v2338-vivo-original-imahyyzaqhgwzfup.jpeg?q=70",
+      "price": "14,999"
+    },
+    {
+      "id": "0.4244324930302865",
+      "title": "POCO M6 Pro 5G",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/s/9/i/m6-pro-5g-mzb0eqjin-poco-original-imags3e7dazavyje.jpeg?q=70",
+      "price": "15,999"
+    }
+  ],
+  "carts": []
+}
