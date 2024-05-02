@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seize The Day</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your task starts here
+
+    // 1. Create a React Element: Your primary task is to use React.createElement to create a new React element. This element should be a paragraph (<p>) with the text "Seize the day".
+
+    let reactElement = React.createElement("p", null, "Seize the day");
+
+    // 2. Render with ReactDOM: Use ReactDOM.render to mount your created React element into the <div id="root"></div> container in your HTML document.
+    let rootElement = document.getElementById("root");
+    ReactDOM.render(reactElement, rootElement);
+
+    // 3. Reflection: As you complete the task, reflect on the differences between manipulating the DOM using traditional JavaScript and React's approach. Consider the benefits of React's declarative UI elements over direct DOM manipulation.
+
+    // --> React's approach simplifies UI development and leads to more scalable and maintainable codebases compared to direct DOM manipulation.
+  </script>
+</html>
