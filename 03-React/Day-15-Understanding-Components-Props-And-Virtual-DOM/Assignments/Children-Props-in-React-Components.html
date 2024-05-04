@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic List Rendering</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Array of image URLs
+      const imageArr = [
+        "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+        "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+        "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg",
+        "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
+        "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+        "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
+        "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
+      ];
+
+      // Image component
+      function Image({ src }) {
+        return (
+          <img
+            style={{
+              width: "300px",
+              height: "400px",
+              border: "1px solid black",
+            }}
+            src={src}
+            alt="Gallery Image"
+          />
+        );
+      }
+
+      // Gallery component to display images in a grid layout
+      function Gallery({ children }) {
+        return (
+          <div
+            style={{
+              width: "100%",
+              margin: "auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "10px",
+            }}
+          >
+            {children}
+          </div>
+        );
+      }
+
+      // Get the root element
+      const rootElement = document.getElementById("root");
+
+      // Render Gallery component with Image components
+      ReactDOM.render(
+        <Gallery>
+          {/* Map through imageArr and render Image components */}
+          {imageArr.map((src, i) => (
+            <Image key={i} src={src} />
+          ))}
+        </Gallery>,
+        rootElement
+      );
+    </script>
+  </body>
+</html>

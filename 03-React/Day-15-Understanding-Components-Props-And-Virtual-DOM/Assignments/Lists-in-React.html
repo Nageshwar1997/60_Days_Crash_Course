@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic List Rendering</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your ItemList component code will go here
+
+      const rootElement = document.getElementById("root");
+
+      // ItemList component displays a list of items with a title
+      function ItemList({ items, title }) {
+        return (
+          <>
+            {/* Conditional rendering: If items exist, render list, else show "No Items Found" */}
+            {items.length > 0 ? (
+              <div>
+                <h1>{title}</h1>
+                <ol>
+                  {/* Map over items and render each item as a list element */}
+                  {items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ol>
+              </div>
+            ) : (
+              <h1>No Items Found</h1>
+            )}
+          </>
+        );
+      }
+
+      // App component renders multiple ItemList components with different data
+      function App() {
+        return (
+          <>
+            {/* Render ItemList component with fruits data */}
+            <ItemList
+              items={[
+                "Apple",
+                "Banana",
+                "Orange",
+                "Pear",
+                "Grape",
+                "Cherry",
+                "Mango",
+              ]}
+              title={"Fruits List"}
+            />
+            <hr />
+            {/* Render ItemList component with hobbies data */}
+            <ItemList
+              items={[
+                "Reading",
+                "Cooking",
+                "Gardening",
+                "Traveling",
+                "Swimming",
+                "Cycling",
+                "Hiking",
+              ]}
+              title={"Hobbies List"}
+            />
+            <hr />
+            {/* Render ItemList component with no items */}
+            <ItemList items={[]} />
+          </>
+        );
+      }
+
+      // Render the App component into the root element
+      ReactDOM.render(<App />, rootElement);
+    </script>
+  </body>
+</html>
