@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX and Dynamic Rendering in React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your JSX code here
+      let root = document.getElementById("root");
+
+      let message1 = "Seize the day";
+      let message2 = "Carpe diem";
+
+      let case1 = true;
+      let case2 = false;
+
+      const element1 = (
+        <p>
+          {case1 ? "True" : "False"}: {case1 ? message1 : message2}
+        </p>
+      );
+      const element2 = (
+        <p>
+          {case2 ? "True" : "False"}: {case2 ? message1 : message2}
+        </p>
+      );
+
+      let elementContainer = (
+        <>
+          {element1}
+          {element2}
+        </>
+      );
+
+      ReactDOM.render(elementContainer, root);
+    </script>
+  </body>
+</html>

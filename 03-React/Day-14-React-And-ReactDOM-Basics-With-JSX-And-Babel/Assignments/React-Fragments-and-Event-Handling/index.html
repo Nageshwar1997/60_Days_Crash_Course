@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX and Dynamic Rendering in React</title>
+    <style>
+      #root {
+        border: 1px solid black;
+        width: 30%;
+        margin: 100px auto;
+        text-align: center;
+        padding: 20px;
+        border-radius: 5px;
+        & button {
+          width: 150px;
+          padding: 10px;
+          border-radius: 4px;
+          border: transparent;
+          font-size: 20px;
+          &:hover {
+            background-color: rgb(164, 229, 192);
+          }
+        }
+        & p {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your JSX code here
+      let root = document.getElementById("root");
+
+      const element = (
+        <React.Fragment>
+          <p>React is a JavaScript library</p>
+          <div className="main">
+            <p>Click the below button to alert 'Hello</p>
+            <button onClick={() => alert("Hello")}>Alert Hello</button>
+          </div>
+        </React.Fragment>
+      );
+
+      ReactDOM.render(element, root);
+    </script>
+  </body>
+</html>
