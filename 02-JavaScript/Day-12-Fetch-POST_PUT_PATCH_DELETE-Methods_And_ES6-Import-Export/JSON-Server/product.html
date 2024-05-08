@@ -5,32 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JSON Server</title>
     <style>
-        img{
-            width: 150px;
-        }
+      img {
+        width: 150px;
+      }
+      #root {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
     </style>
   </head>
   <body>
     <h1>JSON Server</h1>
     <button id="adminBtn">Admin Page</button>
     <div id="root"></div>
+    <div id="paginate">
+      <button id="prev">Prev</button>
+      <span id="pageNo"></span>
+      <button id="next">Next</button>
+    </div>
   </body>
   <script>
     let container = document.getElementById("root");
     let adminBtn = document.getElementById("adminBtn");
+    let prevBtn = document.getElementById("prev");
+    let nextBtn = document.getElementById("next");
+    let pageNoSpan = document.getElementById("pageNo");
+
     let data = [];
+    let pageNo = 1;
+    let limit = 3;
+
     async function getData(URL) {
       try {
         let resp = await fetch(URL);
         data = await resp.json();
         // console.log(data);
         showData(data);
+        updatePageNo();
+        changeBtnState();
       } catch (error) {
         console.log(error);
       }
     }
-
-    getData("http://localhost:3000/products");
 
     function showData(arr) {
       container.innerHTML = "";
@@ -52,28 +68,106 @@
           handleDelete(product.id);
         });
 
-        
-        div.append(img, title, price,deleteBtn);
+        let updateBtn = document.createElement("button");
+        updateBtn.innerText = "Edit";
+        updateBtn.addEventListener("click", () => {
+          handleEdit(product, div);
+        });
+
+        div.append(img, title, price, deleteBtn, updateBtn);
         container.append(div);
       });
     }
 
+    function updatePageNo() {
+      pageNoSpan.textContent = `Page ${pageNo}`;
+    }
+
     adminBtn.addEventListener("click", () => {
-        window.location.href = "admin.html"
-    })
+      window.location.href = "admin.html";
+    });
 
     function handleDelete(id) {
-
-        fetch(`http://localhost:3000/products/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            }
-            
-        })
-        data.splice(id, 1);
-        showData(data);
+      fetch(`http://localhost:3000/products/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      data.splice(id, 1);
+      showData(data);
     }
-    
+
+    function handleEdit(product, div) {
+      div.innerHTML += "";
+      let box = document.createElement("div");
+      let title = document.createElement("input");
+      title.placeholder = "Title here";
+      title.value = product.title;
+
+      let img = document.createElement("input");
+      img.placeholder = "Image URL here";
+      img.value = product.imageUrl;
+
+      let price = document.createElement("input");
+      price.placeholder = "Price here";
+      price.value = product.price;
+
+      let submitBtn = document.createElement("button");
+      submitBtn.innerText = "Submit";
+      submitBtn.addEventListener("click", () => {
+        // let obj = {
+        //   id: product.id,
+        //   title: title.value,
+        //   imageUrl: img.value,
+        //   price: price.value,
+        // };
+        // fetch(`http://localhost:3000/products/${product.id}`, {
+        //   method: "PATCH",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(obj),
+        // });
+        // OR
+
+        product.title = title.value;
+        product.imageUrl = img.value;
+        product.price = price.value;
+
+        fetch(`http://localhost:3000/products/${product.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(product),
+        }).then(() => {
+          getData("http://localhost:3000/products");
+        });
+      });
+      box.append(title, img, price, submitBtn);
+      div.append(box);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (pageNo > 1) {
+        pageNo--;
+      }
+      getData(`http://localhost:3000/products?_page=${pageNo}&_limit=${limit}`);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (pageNo < 3) {
+        pageNo++;
+      }
+      getData(`http://localhost:3000/products?_page=${pageNo}&_limit=${limit}`);
+    });
+
+    function changeBtnState() {
+      prevBtn.disabled = pageNo === 1;
+      nextBtn.disabled = pageNo === 3;
+    }
+
+    getData(`http://localhost:3000/products?_page=${pageNo}&_limit=${limit}`);
   </script>
 </html>

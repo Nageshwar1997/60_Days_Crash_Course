@@ -3,20 +3,56 @@
     {
       "id": 1,
       "title": "laptop, hp, 32GB Ram",
-      "price": "70,000",
+      "price": "79,999",
       "imageUrl": "https://i5.walmartimages.com/asr/35b47efa-88ba-46ab-9faa-71096e67aed7.a7275eab204a8d8dc3d7949f0dbe74cc.jpeg"
     },
     {
       "id": "0.7675576234742523",
       "title": "Vivo T3X 5G (Caletial Green, 128GB)",
       "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/k/g/j/t3x-5g-v2338-vivo-original-imahyyzaqhgwzfup.jpeg?q=70",
-      "price": "14,999"
+      "price": "14,800"
     },
     {
       "id": "0.4244324930302865",
       "title": "POCO M6 Pro 5G",
       "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/s/9/i/m6-pro-5g-mzb0eqjin-poco-original-imags3e7dazavyje.jpeg?q=70",
       "price": "15,999"
+    },
+    {
+      "id": "0.08215902722348711",
+      "title": "Samsung Galaxy S26 5G",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/x/7/n/-original-imagzm8qzhpuwrak.jpeg?q=70",
+      "price": "46,999"
+    },
+    {
+      "id": "0.9679405406840325",
+      "title": "Realme 12x 5G",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/n/i/w/-original-imagzk4mfg6zf2fv.jpeg?q=70",
+      "price": "14,999"
+    },
+    {
+      "id": "0.1304270393380622",
+      "title": "Realme C51",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/b/i/x/-original-imagt4qptrkzwmxa.jpeg?q=70",
+      "price": "9,199"
+    },
+    {
+      "id": "0.6479476213736728",
+      "title": "Samsung Galaxy S23 Ultra",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/u/a/l/-original-imagzm8qrfdmhy8z.jpeg?q=70",
+      "price": "1,09,999"
+    },
+    {
+      "id": "0.07960329010422251",
+      "title": "Realme P1 5G",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/p/p/f/-original-imahyaaxj2kcvvuw.jpeg?q=70",
+      "price": "15,999"
+    },
+    {
+      "id": "0.9584129564908657",
+      "title": "Realme 12X 5G",
+      "imageUrl": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/n/i/w/-original-imagzk4mfg6zf2fv.jpeg?q=70",
+      "price": "49,000"
     }
   ],
   "carts": []
