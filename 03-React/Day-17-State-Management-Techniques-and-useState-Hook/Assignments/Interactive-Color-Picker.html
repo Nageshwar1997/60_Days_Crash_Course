@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Color Picker</title>
+    <style>
+      #hexColorDiv {
+        border: 1px solid black;
+        width: 50%;
+        height: 500px;
+        margin: auto;
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 5px;
+        & > input {
+          width: 250px;
+          height: 40px;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your React code will go here
+
+    // Finding the root element to render React component
+    let root = document.getElementById("root");
+    let reactRoot = ReactDOM.createRoot(root);
+
+    // Function to validate hex color code
+    function ChangeBackgroundColor(colorCode) {
+      let letters = "abcdefABCDEF0123456789";
+      if (colorCode.length == 4 || colorCode.length == 7) {
+        if (colorCode[0] == "#") {
+          let bag = "#";
+          for (let i = 1; i < colorCode.length; i++) {
+            for (let j = 0; j < letters.length; j++) {
+              if (colorCode[i] == letters[j]) {
+                bag += colorCode[i];
+              }
+            }
+          }
+          if (bag == colorCode) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    // React component for the color picker app
+    function App() {
+      // State to hold hex color value and interval id
+      const [hexColor, setHexColor] = React.useState("#fff");
+      const [intervalId, setIntervalId] = React.useState(null);
+
+      // Handler function for color change
+      function handleColorChange(e) {
+        let colorCode = e.target.value;
+        return colorCode ? setHexColor(colorCode) : setHexColor("#fff");
+      }
+
+      // Handler function for invalid color
+      function handleInvalidColor(e) {
+        let colorCode = e.target.value;
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+        if (colorCode) {
+          // Setting interval to check for valid color code
+          const newIntervalId = setInterval(() => {
+            if (!ChangeBackgroundColor(colorCode)) {
+              const confirmation = window.confirm(
+                "Invalid HEX Color Code. Please check your HEX Color Code...!"
+              );
+              if (confirmation) {
+                clearInterval(newIntervalId);
+              }
+            }
+          }, 2000);
+          setIntervalId(newIntervalId);
+        }
+      }
+
+      // Rendering the color picker component
+      return (
+        <div id="hexColorDiv" style={{ backgroundColor: hexColor }}>
+          <input
+            onChange={(e) => {
+              handleColorChange(e);
+              handleInvalidColor(e);
+            }}
+            type="text"
+            placeholder="Enter Hex Color Code (e.g - #abc123)"
+          />
+        </div>
+      );
+    }
+
+    // Rendering the App component into the root element
+    reactRoot.render(<App />);
+  </script>
+</html>
