@@ -1,0 +1,1 @@
+// Counter.jsx ( Count initial Value should be 1. There should be two buttons in this Component. INC, DEC clicking on which should increase, decrease the value of count )
