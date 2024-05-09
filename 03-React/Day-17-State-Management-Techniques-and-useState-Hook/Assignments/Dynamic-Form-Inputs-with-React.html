@@ -1,64 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dynamic Form</title>
-</head>
-<body>
-  <div id="root"></div>
-</body>
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-  const { useState } = React;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Form</title>
+    <style>
+      #root {
+        width: 500px;
+        margin: auto;
+        & > form {
+          border: 1px solid rgb(171, 160, 160);
+          width: 80%;
+          margin: auto;
+          padding: 20px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          border-radius: 10px;
+          & > div {
+            margin: 10px auto;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            & > input {
+              border-radius: 3px;
+              width: 200px;
+              height: 30px;
+              text-transform: capitalize;
+            }
+            & > .btn,#removeBtn {
+              border-radius: 3px;
+              box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+              width: 100px;
+              height: 30px;
+              border: 1px solid transparent;
+            }
+            & > .btn{
+              background-color: rgb(99, 226, 226);
+              
+            }
+            & > #removeBtn{
+              background-color: rgb(226, 99, 99);
+            }
+            & .btn:hover{
+              background-color: green;
+            }
+            & #removeBtn:hover{
+              background-color: red;
+            }
+          }
+          & > div:last-child {
+            justify-content: center;
+            gap: 50px;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your code will go here
 
-  function App() {
-    const [hobbies, setHobbies] = useState([""]);
+    function App() {
+      const [hobbies, setHobbies] = React.useState([""]);
 
-    const handleChange = (index, event) => {
-      const newHobbies = [...hobbies];
-      newHobbies[index] = event.target.value;
-      setHobbies(newHobbies);
-    };
+      function handleChange(event, index) {
+        let newHobbies = [...hobbies];
+        newHobbies[index] = event.target.value;
+        setHobbies(newHobbies);
+      }
 
-    const addHobby = () => {
-      setHobbies([...hobbies, ""]);
-    };
+      function addHobby() {
+        if (hobbies[hobbies.length - 1].trim() === "") {
+          alert("Please fill out the current hobby before adding a new one!");
+          return;
+        }
+        setHobbies([...hobbies, ""]);
+      }
 
-    const removeHobby = (index) => {
-      const newHobbies = [...hobbies];
-      newHobbies.splice(index, 1);
-      setHobbies(newHobbies);
-    };
-
-    const handleSubmit = () => {
-      console.log(hobbies);
-    };
-
-    return (
-      <form onSubmit={handleSubmit}>
-        {hobbies.map((hobby, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              value={hobby}
-              onChange={(e) => handleChange(index, e)}
-            />
-            {index !== 0 && (
-              <button type="button" onClick={() => removeHobby(index)}>
-                Remove
-              </button>
-            )}
+      function removeHobby(index) {
+        let newHobbies = [...hobbies];
+        newHobbies.splice(index, 1);
+        setHobbies(newHobbies);
+      }
+      function handleSubmit(e) {
+        e.preventDefault();
+        if (hobbies[hobbies.length - 1].trim() === "") {
+          return;
+        } else {
+          console.log(hobbies);
+          alert("Hobbies added successfully");
+        }
+      }
+      return (
+        <form onSubmit={(e) => handleSubmit(e)}>
+          {hobbies.map((hobby, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                placeholder="Add hobby here"
+                value={hobby}
+                onChange={(e) => handleChange(e, index)}
+              />
+              {index != 0 && (
+                <button id="removeBtn" onClick={() => removeHobby(index)}>Remove</button>
+              )}
+            </div>
+          ))}
+          <div>
+            <button className="btn" onClick={addHobby}>Add Hobby</button>
+            <button className="btn" type="submit">Submit</button>
           </div>
-        ))}
-        <button type="button" onClick={addHobby}>Add Hobby</button>
-        <button type="submit">Submit</button>
-      </form>
-    );
-  }
+        </form>
+      );
+    }
 
-  ReactDOM.render(<App />, document.getElementById('root'));
-</script>
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
 </html>
