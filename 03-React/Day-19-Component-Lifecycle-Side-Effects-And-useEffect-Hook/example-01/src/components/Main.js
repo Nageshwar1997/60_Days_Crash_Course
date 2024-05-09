@@ -1,8 +1,9 @@
-import FruitsList from "./FruitsList";
+import Counter from "./Counter";
+
 
 const Main = () => {
     return <div id="main">
-      <FruitsList />
+      <Counter />
   </div>;
 };
 
