@@ -88,132 +88,148 @@
   <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    // Your  code will go here
+    // Your code will go here
 
     let rootElement = document.getElementById("root");
     let reactRoot = ReactDOM.createRoot(rootElement);
 
     function App() {
-      const [todos, setTodos] = React.useState([]);
-      const [originalTodos, setOriginalTodos] = React.useState([]);
+        // State for storing the list of todos and the original list (before filtering)
+        const [todos, setTodos] = React.useState([]);
+        const [originalTodos, setOriginalTodos] = React.useState([]);
 
-      async function fetchData(URL) {
-        try {
-          let resp = await fetch(URL);
-          let data = await resp.json();
-          setTodos(data.todos);
-          setOriginalTodos(data.todos);
-          console.log(data.todos);
-        } catch (error) {
-          console.log(error);
+        // Function to fetch data from the API
+        async function fetchData(URL) {
+            try {
+                let resp = await fetch(URL);
+                let data = await resp.json();
+                setTodos(data.todos);
+                setOriginalTodos(data.todos);
+                console.log(data.todos);
+            } catch (error) {
+                console.log(error);
+            }
         }
-      }
 
-      function ShowTodo({ todo, index }) {
-        return (
-          <tr>
-            <td>{index + 1}</td>
-            <td>{todo.todo}</td>
-            <td>{todo.id}</td>
-            <td>{todo.userId}</td>
-            <td style={{ color: todo.completed ? "green" : "red" }}>
-              {todo.completed ? "Yes" : "No"}
-            </td>
-            <td>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => {
-                  setTodos(
-                    todos.map((t) => {
-                      if (t.id === todo.id) {
-                        return { ...t, completed: !t.completed };
-                      }
-                      return t;
-                    })
-                  );
-                }}
-              />
-            </td>
-            <td>
-              <button
-                onClick={() => {
-                  setTodos(todos.filter((t) => t.id !== todo.id));
-                }}
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        );
-      }
-
-      function handleFilter(e) {
-        let selectedValue = e.target.value;
-        if (selectedValue === "completed") {
-          setTodos(originalTodos.filter((todo) => todo.completed === true));
-        } else if (selectedValue === "inCompleted") {
-          setTodos(originalTodos.filter((todo) => todo.completed === false));
-        } else {
-          setTodos(originalTodos);
-        }
-      }
-
-      function handleSearch(event) {
-        let currentSearchValue = event.target.value;
-
-        if (currentSearchValue) {
-          setTodos(
-            todos.filter((todo) =>
-              todo.todo.toLowerCase().includes(currentSearchValue.toLowerCase())
-            )
-          );
-        } else {
-          setTodos(originalTodos);
-        }
-      }
-      React.useEffect(() => {
-        fetchData(`https://dummyjson.com/todos?limit=150`);
-      }, []);
-      return (
-        <div>
-          <h1>✨ Todo List ✨</h1>
-          <nav>
-            <select onChange={(e) => handleFilter(e)}>
-              <option value="">All</option>
-              <option value="completed">Completed</option>
-              <option value="inCompleted">Not Completed</option>
-            </select>
-            <input
-              type="text"
-              onChange={(e) => handleSearch(e)}
-              placeholder="Search Todo"
-            />
-          </nav>
-          <div>
-            <table>
-              <thead>
+        // Component to display each individual todo item
+        function ShowTodo({ todo, index }) {
+            return (
                 <tr>
-                  <th>S.N</th>
-                  <th>Todo</th>
-                  <th>Id</th>
-                  <th>UserId</th>
-                  <th>Completed</th>
-                  <th>Toggle</th>
-                  <th>Actions</th>
+                    <td>{index + 1}</td>
+                    <td>{todo.todo}</td>
+                    <td>{todo.id}</td>
+                    <td>{todo.userId}</td>
+                    <td style={{ color: todo.completed ? "green" : "red" }}>
+                        {todo.completed ? "Yes" : "No"}
+                    </td>
+                    <td>
+                        {/* Checkbox to toggle todo completion status */}
+                        <input
+                            type="checkbox"
+                            checked={todo.completed}
+                            onChange={() => {
+                                setTodos(
+                                    todos.map((t) => {
+                                        if (t.id === todo.id) {
+                                            return { ...t, completed: !t.completed };
+                                        }
+                                        return t;
+                                    })
+                                );
+                            }}
+                        />
+                    </td>
+                    <td>
+                        {/* Button to delete a todo item */}
+                        <button
+                            onClick={() => {
+                                setTodos(todos.filter((t) => t.id !== todo.id));
+                            }}
+                        >
+                            Delete
+                        </button>
+                    </td>
                 </tr>
-              </thead>
-              <tbody>
-                {todos.map((todo, index) => (
-                  <ShowTodo key={index} todo={todo} index={index} />
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      );
+            );
+        }
+
+        // Function to handle filtering of todos based on completion status
+        function handleFilter(e) {
+            let selectedValue = e.target.value;
+            if (selectedValue === "completed") {
+                setTodos(originalTodos.filter((todo) => todo.completed === true));
+            } else if (selectedValue === "inCompleted") {
+                setTodos(originalTodos.filter((todo) => todo.completed === false));
+            } else {
+                setTodos(originalTodos);
+            }
+        }
+
+        // Function to handle searching for todos
+        function handleSearch(event) {
+            let currentSearchValue = event.target.value;
+
+            if (currentSearchValue) {
+                setTodos(
+                    todos.filter((todo) =>
+                        todo.todo.toLowerCase().includes(currentSearchValue.toLowerCase())
+                    )
+                );
+            } else {
+                setTodos(originalTodos);
+            }
+        }
+
+        // Fetch initial data when component mounts
+        React.useEffect(() => {
+            fetchData(`https://dummyjson.com/todos?limit=150`);
+        }, []);
+
+        // Render the main component
+        return (
+            <div>
+                <h1>✨ Todo List ✨</h1>
+                {/* Filter and search inputs */}
+                <nav>
+                    <select onChange={(e) => handleFilter(e)}>
+                        <option value="">All</option>
+                        <option value="completed">Completed</option>
+                        <option value="inCompleted">Not Completed</option>
+                    </select>
+                    <input
+                        type="text"
+                        onChange={(e) => handleSearch(e)}
+                        placeholder="Search Todo"
+                    />
+                </nav>
+                {/* Todo list table */}
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S.N</th>
+                                <th>Todo</th>
+                                <th>Id</th>
+                                <th>UserId</th>
+                                <th>Completed</th>
+                                <th>Toggle</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* Mapping over todos to display each todo item */}
+                            {todos.map((todo, index) => (
+                                <ShowTodo key={index} todo={todo} index={index} />
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
     }
 
+    // Rendering the App component into the root element
     reactRoot.render(<App />);
-  </script>
+</script>
+
 </html>
