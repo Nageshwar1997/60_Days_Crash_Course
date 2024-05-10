@@ -4,6 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List with Filtering Functionality</title>
+    <style>
+      #root {
+        & h1 {
+          font-size: 30px;
+          text-transform: uppercase;
+          color: #2b619e;
+          text-decoration: underline;
+          text-align: center;
+        }
+      }
+      label {
+        font-size: 20px;
+        color: #2b619e;
+      }
+      table {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 90%;
+        margin: auto;
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      table td,
+      table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #8caacf;
+      }
+
+      table tr:hover {
+        background-color: #ddd;
+      }
+
+      table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #0468aa;
+        color: white;
+        text-align: center;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      input[type="text"],
+      select {
+        width: 30%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+      }
+      nav {
+        display: flex;
+        justify-content: space-around;
+      }
+      button {
+        background-color: #e43e3e;
+        color: white;
+        padding: 5px 5px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -17,6 +93,127 @@
     let rootElement = document.getElementById("root");
     let reactRoot = ReactDOM.createRoot(rootElement);
 
-    
+    function App() {
+      const [todos, setTodos] = React.useState([]);
+      const [originalTodos, setOriginalTodos] = React.useState([]);
+
+      async function fetchData(URL) {
+        try {
+          let resp = await fetch(URL);
+          let data = await resp.json();
+          setTodos(data.todos);
+          setOriginalTodos(data.todos);
+          console.log(data.todos);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      function ShowTodo({ todo, index }) {
+        return (
+          <tr>
+            <td>{index + 1}</td>
+            <td>{todo.todo}</td>
+            <td>{todo.id}</td>
+            <td>{todo.userId}</td>
+            <td style={{ color: todo.completed ? "green" : "red" }}>
+              {todo.completed ? "Yes" : "No"}
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => {
+                  setTodos(
+                    todos.map((t) => {
+                      if (t.id === todo.id) {
+                        return { ...t, completed: !t.completed };
+                      }
+                      return t;
+                    })
+                  );
+                }}
+              />
+            </td>
+            <td>
+              <button
+                onClick={() => {
+                  setTodos(todos.filter((t) => t.id !== todo.id));
+                }}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        );
+      }
+
+      function handleFilter(e) {
+        let selectedValue = e.target.value;
+        if (selectedValue === "completed") {
+          setTodos(originalTodos.filter((todo) => todo.completed === true));
+        } else if (selectedValue === "inCompleted") {
+          setTodos(originalTodos.filter((todo) => todo.completed === false));
+        } else {
+          setTodos(originalTodos);
+        }
+      }
+
+      function handleSearch(event) {
+        let currentSearchValue = event.target.value;
+
+        if (currentSearchValue) {
+          setTodos(
+            todos.filter((todo) =>
+              todo.todo.toLowerCase().includes(currentSearchValue.toLowerCase())
+            )
+          );
+        } else {
+          setTodos(originalTodos);
+        }
+      }
+      React.useEffect(() => {
+        fetchData(`https://dummyjson.com/todos?limit=150`);
+      }, []);
+      return (
+        <div>
+          <h1>✨ Todo List ✨</h1>
+          <nav>
+            <select onChange={(e) => handleFilter(e)}>
+              <option value="">All</option>
+              <option value="completed">Completed</option>
+              <option value="inCompleted">Not Completed</option>
+            </select>
+            <input
+              type="text"
+              onChange={(e) => handleSearch(e)}
+              placeholder="Search Todo"
+            />
+          </nav>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>S.N</th>
+                  <th>Todo</th>
+                  <th>Id</th>
+                  <th>UserId</th>
+                  <th>Completed</th>
+                  <th>Toggle</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {todos.map((todo, index) => (
+                  <ShowTodo key={index} todo={todo} index={index} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    }
+
+    reactRoot.render(<App />);
   </script>
 </html>
