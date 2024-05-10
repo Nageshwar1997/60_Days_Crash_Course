@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Quiz Application</title>
+    <style>
+      #root {
+        border: 1px solid black;
+        width: 50%;
+        margin: auto;
+        font-family: Arial, Helvetica, sans-serif;
+        & #score {
+          width: 80%;
+          padding: 30px;
+          margin: auto;
+          text-align: center;
+        }
+        & > #quiz {
+          /* border: 1px solid black; */
+          width: 100%;
+          & > div {
+            /* border: 1px solid black; */
+            margin: 10px;
+            width: 500px;
+            padding: 15px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            & > h3 {
+              margin: 10px;
+              font-size: larger;
+            }
+            & > label {
+              margin: 10px;
+              display: flex;
+              & > input {
+                margin-right: 10px;
+                width: 15px;
+              }
+            }
+          }
+          & > button {
+            margin: 10px;
+            width: 100px;
+            height: 30px;
+            font-weight: bold;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+
+    const { useState } = React;
+
+    const questions = [
+      {
+        question: "What is the capital of France?",
+        options: ["Paris", "Berlin", "Rome", "Madrid"],
+        correctAnswer: "Paris",
+      },
+      {
+        question: "Who wrote 'To Kill a Mockingbird'?",
+        options: ["Harper Lee", "Mark Twain", "J.K. Rowling", "Stephen King"],
+        correctAnswer: "Harper Lee",
+      },
+      {
+        question: "What is the chemical symbol for water?",
+        options: ["H2O", "CO2", "NaCl", "O2"],
+        correctAnswer: "H2O",
+      },
+    ];
+
+    function Quiz() {
+      const [selectedAnswer, setSelectedAnswer] = useState([]);
+      const [showScore, setShowScore] = useState(false);
+      const [score, setScore] = useState(0);
+
+      function handleAnswerSelect(questionIndex, selectedOption) {
+        let newSelectedAnswer = [...selectedAnswer];
+        newSelectedAnswer[questionIndex] = selectedOption;
+        setSelectedAnswer(newSelectedAnswer);
+      }
+
+      function calculateScore() {
+        let newScore = 0;
+        questions.forEach((question, questionIndex) => {
+          if (question.correctAnswer === selectedAnswer[questionIndex]) {
+            newScore++;
+          }
+        });
+        setScore(newScore);
+        setShowScore(true);
+      }
+
+      function restartQuiz() {
+        setSelectedAnswer([]);
+        setShowScore(false);
+        setScore(0);
+      }
+
+      function ShowCorrectAnswers() {
+        return (
+          <div>
+            {questions.map((question, questionIndex) => (
+              <div key={questionIndex}>
+                <h2>
+                  Question {questionIndex + 1}. {question.question}
+                </h2>
+                <h3>
+                  Your Answer:{" "}
+                  <span
+                    style={{
+                      color:
+                        question.correctAnswer === selectedAnswer[questionIndex]
+                          ? "green"
+                          : "red",
+                    }}
+                  >
+                    {selectedAnswer[questionIndex]
+                      ? selectedAnswer[questionIndex]
+                      : "Not Answered"}
+                  </span>
+                </h3>
+                <h3>Correct Answer: {question.correctAnswer}</h3>
+                <hr />
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      return (
+        <>
+          {showScore ? (
+            <div id="score">
+              <h1>
+                You scored{" "}
+                <span style={{ color: score >= 2 ? "green" : "red" }}>
+                  {score}
+                </span>{" "}
+                out of {questions?.length}
+              </h1>
+              <hr />
+              <ShowCorrectAnswers />
+              <button onClick={restartQuiz}>Restart Quiz</button>
+            </div>
+          ) : (
+            <div id="quiz">
+              {questions.map((question, questionIndex) => (
+                <div key={questionIndex}>
+                  <h3>{question.question}</h3>
+                  {question.options.map((option, optionIndex) => (
+                    <label key={optionIndex}>
+                      <input
+                        type="radio"
+                        name={`question${questionIndex}`}
+                        value={option}
+                        checked={selectedAnswer[questionIndex] === option}
+                        onChange={() =>
+                          handleAnswerSelect(questionIndex, option)
+                        }
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              ))}
+              <button onClick={calculateScore}>Submit</button>
+            </div>
+          )}
+        </>
+      );
+    }
+
+    let rootElement = document.getElementById("root");
+    let reactRoot = ReactDOM.createRoot(rootElement);
+
+    reactRoot.render(<Quiz />);
+  </script>
+</html>
