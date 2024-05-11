@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile list with Dynamic Search</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      #root {
+        width: 100%;
+        & > #container {
+          & > nav {
+            width: 100%;
+            height: 50px;
+            background-color: #bbb8b5;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+            & > input[type="text"] {
+              width: 300px;
+              height: 30px;
+              border-radius: 8px;
+              border: 1px solid transparent;
+              padding-left: 10px;
+            }
+            & > .pagination {
+              width: 40%;
+              height: 40px;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              & button {
+                width: 45px;
+                height: 30px;
+                border-radius: 5px;
+                border: 1px solid transparent;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+              }
+            }
+            & > ul {
+              border-radius: 10px;
+              position: fixed;
+              width: 300px;
+              top: 35px;
+              left: 10%;
+              list-style-type: none;
+              padding: 0;
+              background-color: #ffffff;
+              & li {
+                margin: 10px;
+                cursor: pointer;
+              }
+              & li:hover {
+                background-color: #b2dcf8;
+                border-radius: 3px;
+              }
+            }
+          }
+          & > .user {
+            position: relative;
+            top: 50px;
+            display: flex;
+            justify-content: left;
+            margin-bottom: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+              rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+            & > .left {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: #b2dcf8;
+            }
+            & > .right {
+              width: calc(100% - 10px);
+              padding-left: 10px;
+              background-color: #b2dcf8;
+              padding-right: 10px;
+
+              & > .top {
+                font-size: 17px;
+                text-align: center;
+              }
+              & > .bottom {
+                width: 100%;
+                font-size: 14px;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                & > div {
+                  width: 100%;
+                  margin: 10px auto;
+                  border-radius: 10px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: left;
+                  row-gap: 10px;
+                  & > div {
+                    padding: 10px;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+                      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                    background-color: aliceblue;
+                    border-radius: 5px;
+                    & > .color {
+                      color: rgb(255, 0, 153);
+                      font-size: 18px;
+                      font-weight: bold;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+
+    // Functional component for the entire application
+    const App = () => {
+      // State variables for managing user data, pagination, search, and loading/error status
+      const [users, setUsers] = React.useState([]);
+      const [originalUsers, setOriginalUsers] = React.useState([]);
+      const [page, setPage] = React.useState(1);
+      const [searchQuery, setSearchQuery] = React.useState("");
+      const [limit, setLimit] = React.useState(10);
+      const [total, setTotal] = React.useState(0);
+      const [skip, setSkip] = React.useState(0);
+      const [loading, setLoading] = React.useState(false);
+      const [error, setError] = React.useState(false);
+      const [suggestions, setSuggestions] = React.useState([]);
+
+      // Function to fetch and update user data
+      async function fetchAndUpdateData() {
+        setLoading(true); // Setting loading state to true
+        // Fetching data from the API
+        // Using Axios library for making HTTP requests
+        // The limit and skip parameters are used to paginate the data
+        try {
+          const newSkip = (page - 1) * limit;
+          let resp = await axios({
+            method: "get",
+            url: `https://dummyjson.com/users?limit=${limit}&skip=${newSkip}`,
+          });
+
+          // Updating state variables with the fetched data
+          setUsers(resp.data.users);
+          setOriginalUsers(resp.data.users);
+          setLimit(resp.data.limit);
+          setTotal(resp.data.total);
+          setLoading(false);
+          setError(false);
+        } catch (error) {
+          // Handling errors
+          console.log(error);
+          setLoading(false);
+          setError(true);
+        }
+      }
+
+      // Component for displaying user details
+      const BasicDetails = ({ user }) => {
+        const {
+          firstName,
+          lastName,
+          maidenName,
+          age,
+          gender,
+          birthDate,
+          email,
+          phone,
+          bloodGroup,
+        } = user;
+
+        return (
+          <>
+            <div>
+              <p className="color">Basic Details</p>
+              <p>
+                Name:{" "}
+                <strong>
+                  {firstName} {lastName}
+                </strong>
+              </p>
+              <p>
+                Maiden Name: <strong>{maidenName}</strong>
+              </p>
+              <p>
+                Age: <strong>{age}</strong>
+              </p>
+              <p>
+                Gender: <strong>{gender}</strong>
+              </p>
+              <p>
+                Birth Date: <strong>{birthDate}</strong>
+              </p>
+
+              <p>
+                Blood Group: <strong>{bloodGroup}</strong>
+              </p>
+            </div>
+            <div>
+              <p className="color">Contact Details</p>
+              <p>
+                Phone: <strong>{phone}</strong>
+              </p>
+              <p>
+                Email: <strong>{email}</strong>
+              </p>
+            </div>
+          </>
+        );
+      };
+
+      // Component for displaying user life style details
+      const LifeStyle = ({ user }) => {
+        const {
+          height,
+          weight,
+          eyeColor,
+          hair: { color, type },
+          ip,
+          domain,
+        } = user;
+        return (
+          <>
+            <div>
+              <p className="color">Life Style</p>
+              <p>
+                Height: <strong>{height}</strong>
+              </p>
+              <p>
+                Weight: <strong>{weight}</strong>
+              </p>
+              <p>
+                Eye Color: <strong>{eyeColor}</strong>
+              </p>
+              <p>Hair Style:</p>
+              <p>
+                Color: <strong>{color}</strong>
+              </p>
+              <p>
+                Type: <strong>{type}</strong>
+              </p>
+            </div>
+            <div>
+              <p className="color">Other Details</p>
+              <p>
+                IP: <strong>{ip}</strong>
+              </p>
+              <p>
+                Domain: <strong>{domain}</strong>
+              </p>
+            </div>
+          </>
+        );
+      };
+
+      // Component for displaying user address details
+      const HomeAddress = ({ user }) => {
+        const {
+          address: {
+            address,
+            city,
+            coordinates: { lat, lng },
+            postalCode,
+            state,
+          },
+          macAddress,
+          university,
+        } = user;
+
+        return (
+          <>
+            <div>
+              <p className="color">Home Address</p>
+              <p>
+                Address: <strong>{address}</strong>
+              </p>
+              <p>
+                City: <strong>{city}</strong>
+              </p>
+              <p>
+                Latitude: <strong>{lat}</strong>
+              </p>
+              <p>
+                Longitude: <strong>{lng}</strong>
+              </p>
+              <p>
+                Postal Code: <strong>{postalCode}</strong>
+              </p>
+              <p>
+                State: <strong>{state}</strong>
+              </p>
+            </div>
+            <div>
+              <p className="color">Other Details</p>
+              <p>
+                MacAddress: <strong>{macAddress}</strong>
+              </p>
+              <p>
+                University: <strong>{university}</strong>
+              </p>
+            </div>
+          </>
+        );
+      };
+
+      // Component for displaying user office details
+      const OfficeDetails = ({ user }) => {
+        const {
+          company: {
+            address: {
+              address,
+              city,
+              coordinates: { lat, lng },
+              postalCode,
+              state,
+            },
+            department,
+            name,
+            title,
+          },
+        } = user;
+
+        return (
+          <>
+            <div>
+              <p className="color">Office Details</p>
+              <p>
+                Company: <strong>{name}</strong>
+              </p>
+              <p>
+                Position: <strong>{title}</strong>
+              </p>
+              <p>
+                Department: <strong>{department}</strong>
+              </p>
+            </div>
+            <div>
+              <p className="color">Office Address</p>
+              <p>
+                Address: <strong>{address}</strong>
+              </p>
+              <p>
+                City: <strong>{city}</strong>
+              </p>
+              <p>
+                Latitude: <strong>{lat}</strong>
+              </p>
+              <p>
+                Longitude: <strong>{lng}</strong>
+              </p>
+              <p>
+                Postal Code: <strong>{postalCode}</strong>
+              </p>
+              <p>
+                State: <strong>{state}</strong>
+              </p>
+            </div>
+          </>
+        );
+      };
+
+      // Component for displaying user bank details
+      const BankDetails = ({ user }) => {
+        const {
+          bank: { cardExpire, cardNumber, cardType, currency, iban },
+          crypto: { coin, wallet, network },
+          ssn,
+          ein,
+        } = user;
+
+        return (
+          <>
+            <div>
+              <p className="color">Bank Details</p>
+              <p>
+                Card Number: <strong>{cardNumber}</strong>
+              </p>
+              <p>
+                Card Type: <strong>{cardType}</strong>
+              </p>
+              <p>
+                Card Expire: <strong>{cardExpire}</strong>
+              </p>
+              <p>
+                Currency: <strong>{currency}</strong>
+              </p>
+              <p>
+                IBAN: <strong>{iban}</strong>
+              </p>
+            </div>
+            <div>
+              <p className="color">Crypto Details</p>
+              <p>
+                Coin: <strong>{coin}</strong>
+              </p>
+              <p>
+                Wallet: <strong>{wallet}</strong>
+              </p>
+              <p>
+                Network: <strong>{network}</strong>
+              </p>
+              <p>
+                SSN: <strong>{ssn}</strong>, EIN: <strong>{ein}</strong>
+              </p>
+            </div>
+          </>
+        );
+      };
+
+      // Function to handle search input
+      function handleSearch(e) {
+        let currentSearchQuery = e.target.value;
+        setSearchQuery(currentSearchQuery);
+
+        if (currentSearchQuery) {
+          let filteredUsers = originalUsers.filter((user) => {
+            return (
+              user.firstName
+                .toLowerCase()
+                .includes(currentSearchQuery.toLowerCase()) ||
+              user.lastName
+                .toLowerCase()
+                .includes(currentSearchQuery.toLowerCase())
+            );
+          });
+          setUsers(filteredUsers);
+          let userSuggestion = filteredUsers.map((user) => ({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            id: user.id,
+          }));
+          setSuggestions(userSuggestion);
+        } else {
+          setUsers(originalUsers);
+          setSuggestions([]);
+        }
+      }
+
+      // Function to handle suggestion click
+      function handleSuggestionClick(userId) {
+        let selectedUser = originalUsers.find((user) => user.id === userId);
+        setUsers([selectedUser]);
+      }
+
+      // Function to handle pagination
+      function Pagination() {
+        return (
+          <div className="pagination">
+            <button onClick={handlePrevPage} disabled={page === 1}>
+              Prev
+            </button>
+            {originalUsers.map((user, index) => {
+              return (
+                <button onClick={() => handlePageChange(index + 1)} key={index}>
+                  {index + 1}
+                </button>
+              );
+            })}
+            <button
+              onClick={handleNextPage}
+              disabled={page === Math.ceil(total / limit) || total === 0}
+            >
+              Next
+            </button>
+          </div>
+        );
+      }
+
+      // Function to handle page change
+      function handlePageChange(newPage) {
+        setPage(newPage);
+      }
+
+      // Function to handle previous page
+      function handlePrevPage() {
+        setPage((prevPage) => Math.max(prevPage - 1, 1));
+      }
+
+      // Function to handle next page
+      function handleNextPage() {
+        setPage((prevPage) => prevPage + 1);
+        console.log(users);
+      }
+
+      // Component for displaying individual user
+      function ShowUser({ user }) {
+        const { image, username, userAgent } = user;
+
+        return (
+          <div className="user">
+            <div className="left">
+              <div className="imgDiv">
+                <img src={image} alt={username} />
+              </div>
+            </div>
+
+            <div className="right">
+              <div className="top">
+                <p>
+                  User Agent: <strong>{userAgent}</strong>
+                </p>
+              </div>
+              <div className="bottom">
+                <div className="basicDetails">
+                  <BasicDetails user={user} />
+                </div>
+                <div className="lifeStyle">
+                  <LifeStyle user={user} />
+                </div>
+                <div className="homeAddress">
+                  <HomeAddress user={user} />
+                </div>
+                <div className="officeDetails">
+                  <OfficeDetails user={user} />
+                </div>
+                <div className="bankDetails">
+                  <BankDetails user={user} />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // Effect hook to fetch data when page or limit changes
+      React.useEffect(() => {
+        setSkip((page - 1) * limit);
+        fetchAndUpdateData(); // Fetching and updating data
+      }, [page, limit]);
+
+      // Rendering loading state
+      if (loading) {
+        return <h1>Loading......</h1>;
+      }
+      // Rendering error state
+      if (error) {
+        return <h1>Something went wrong....</h1>;
+      }
+
+      // Rendering the App component into the UI
+      return (
+        <div id="container">
+          <nav>
+            <input
+              type="text"
+              onChange={(e) => handleSearch(e)}
+              value={searchQuery}
+            />
+            {suggestions.length > 0 && (
+              <ul>
+                {suggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion.id)}
+                  >
+                    {suggestion.firstName} {suggestion.lastName}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <Pagination />
+          </nav>
+          {users.map((user, index) => (
+            <ShowUser key={index} user={user} />
+          ))}
+        </div>
+      );
+    };
+
+    // Rendering the App component into the root element
+    let rootElement = document.getElementById("root");
+    let reactRoot = ReactDOM.createRoot(rootElement);
+    reactRoot.render(<App />);
+  </script>
+</html>
