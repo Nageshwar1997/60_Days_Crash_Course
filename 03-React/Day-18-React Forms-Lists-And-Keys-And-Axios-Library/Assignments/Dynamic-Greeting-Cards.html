@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Greeting Cards</title>
+    <style>
+      #container {
+        display: grid;
+        margin-left: 30px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        & > .card {
+          width: 90%;
+          text-align: center;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          border-radius: 8px;
+          & span {
+            color: tomato;
+          }
+          & > img {
+            width: 100%;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+
+    const GreetingCard = (greeting) => {
+      const { message, name } = greeting;
+      return (
+        <div className="card">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt={name} />
+          <h2>
+            {message} <span>{name}</span>!
+          </h2>
+        </div>
+      );
+    };
+
+    function App() {
+      const greetingsArray = [
+        {
+          name: "Nageshwar",
+          message: "Hi, how are you?",
+        },
+        {
+          name: "Prateek",
+          message: "Happy to meet you",
+        },
+        {
+          name: "Praveen",
+          message: "Good Morning",
+        },
+        {
+          name: "Pankaj",
+          message: "Good Evening",
+        },
+        {
+          name: "Vishal",
+          message: "Good Night",
+        },
+        {
+          name: "Shubham",
+          message: "Happy Birthday",
+        },
+        {
+          name: "Akash",
+          message: "Happy Anniversary",
+        },
+        {
+          name: "Vishal",
+          message: "Happy Birthday",
+        },
+        {
+          name: "Shubham",
+          message: "Happy Anniversary",
+        },
+      ];
+      return (
+        <div id="container">
+          {greetingsArray.map((greeting, index) => (
+            <GreetingCard key={index} {...greeting} />
+          ))}
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</html>
