@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+
+    function App() {
+      const [tasks, setTasks] = React.useState([]);
+
+      function AddTask({ task }) {
+        console.log(task);
+        return (
+          <tr>
+            <td></td>
+            <td>
+              <input type="text" />
+            </td>
+            <td>
+              <input type="text" />
+            </td>
+            <td>
+              <select>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </td>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <button>Delete</button>
+            </td>
+          </tr>
+        );
+      }
+
+      async function fetchTasks() {
+        try {
+          let resp = await axios({
+            method: "get",
+            url: "http://localhost:3000/todos",
+          });
+          setTasks(resp.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        let task = {
+          title: event.target[0].value,
+          assignee: event.target[2].value,
+          priority: event.target[3].value,
+          completed: event.target[4].checked,
+        };
+
+        async function postTask() {
+          try {
+            let resp = await axios({
+              method: "post",
+              url: "http://localhost:3000/todos",
+              data: task,
+            });
+            setTasks([...tasks, task]);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
+        postTask();
+      }
+
+      React.useEffect(() => {
+        fetchTasks();
+      }, []);
+      return (
+        <div className="App">
+          <nav>
+            <button>Get All Tasks</button>
+            <button>Show Incomplete Tasks</button>
+          </nav>
+          <div>
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <label>Task Title</label>
+              <input type="text" />
+              <label>Completed</label>
+              <input type="checkbox" />
+              <label>Assignee</label>
+              <input type="text" />
+              <label>Priority</label>
+              <select>
+                <option value="">Select Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Mid</option>
+                <option value="Low">Low</option>
+              </select>
+              <input type="submit" value="Add Task" />
+            </form>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>S.N</th>
+                    <th>Task</th>
+                    <th>Assignee</th>
+                    <th>Priority</th>
+                    <th>Completed</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tasks.map((task, index) => {
+                    return <AddTask key={index} />;
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+
+    // function TaskForm() {
+    //   const [title, setTitle] = React.useState("");
+    //   const [isCompleted, setIsCompleted] = React.useState(false);
+    //   const [assignee, setAssignee] = React.useState("");
+
+    //   const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     addTask({ title, isCompleted, assignee });
+    //     setTitle("");
+    //     setIsCompleted(false);
+    //     setAssignee("");
+    //   };
+
+    //   return (
+    //     <form onSubmit={(e) => handleSubmit(e)}>
+    //       <input
+    //         type="text"
+    //         value={title}
+    //         onChange={(e) => setTitle(e.target.value)}
+    //         placeholder="Enter Task"
+    //         required
+    //       />
+    //       <input
+    //         type="checkbox"
+    //         checked={isCompleted}
+    //         onChange={(e) => setIsCompleted(e.target.checked)}
+    //       />
+    //       <input
+    //         type="text"
+    //         value={assignee}
+    //         onChange={(e) => setAssignee(e.target.value)}
+    //         placeholder="Assignee"
+    //       />
+    //       <button type="submit">Add Task</button>
+    //     </form>
+    //   );
+    // }
+
+    // function Task({ task, updateTask, deleteTask }) {
+    //   const handleUpdate = (updates) => {
+    //     updateTask(task.id, updates);
+    //   };
+    //   return (
+    //     <div>
+    //       <input
+    //         type="text"
+    //         value={task.title}
+    //         onChange={(e) => handleUpdate({ title: e.target.value })}
+    //       />
+    //       <input
+    //         type="checkbox"
+    //         checked={task.isCompleted}
+    //         onChange={(e) => handleUpdate({ isCompleted: e.target.checked })}
+    //       />
+    //       <input
+    //         type="text"
+    //         value={task.assignee}
+    //         onChange={(e) => handleUpdate({ assignee: e.target.value })}
+    //       />
+    //       <button onClick={() => deleteTask(task.id)}>Delete</button>
+    //     </div>
+    //   );
+    // }
+
+    // function TaskManager() {
+    //   const [tasks, setTasks] = React.useState([]);
+    //   const [showIncomplete, setShowIncomplete] = React.useState(false);
+    //   const [loading, setLoading] = React.useState(false);
+    //   const [error, setError] = React.useState(false);
+
+    //   const fetchTasks = async () => {
+    //     setLoading(true);
+    //     try {
+    //       let resp = await axios({
+    //         method: "get",
+    //         url: "http://localhost:3000/todos",
+    //       });
+    //       setTasks(resp.data);
+    //       setLoading(false);
+    //       setError(false);
+    //     } catch (error) {
+    //       setLoading(false);
+    //       setError(true);
+    //       console.log(error);
+    //     }
+    //   };
+
+    //   const addTask = async (newTask) => {
+    //     console.log(newTask);
+    //     try {
+    //       let resp = await axios({
+    //         method: "post",
+    //         url: "http://localhost:3000/todos",
+    //         data: newTask,
+    //       });
+    //       fetchTasks();
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   };
+
+    //   const updateTask = async (taskId, updates) => {
+    //     try {
+    //       let resp = await axios({
+    //         method: "put",
+    //         url: `http://localhost:3000/todos/${taskId}`,
+    //         data: updates,
+    //       });
+    //       fetchTasks();
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   };
+
+    //   const deleteTask = async (taskId) => {
+    //     try {
+    //       let resp = await axios({
+    //         method: "delete",
+    //         url: `http://localhost:3000/todos/${taskId}`,
+    //       });
+    //       fetchTasks();
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   };
+
+    //   const toggleShowIncomplete = () => {
+    //     setShowIncomplete(!showIncomplete);
+    //   };
+
+    //   let filteredTasks = showIncomplete
+    //     ? tasks.filter((task) => !task.completed)
+    //     : tasks;
+
+    //   return (
+    //     <div>
+    //       <TaskForm addTask={addTask} />
+    //       <button onClick={fetchTasks}>Get all Tasks</button>
+    //       <button onClick={toggleShowIncomplete}>
+    //         {showIncomplete ? "Show All Tasks" : "Show Incomplete Tasks"}
+    //       </button>
+    //       {
+    //         filteredTasks.map((task, index) => (
+    //           <Task key={index} task={task} updateTask={updateTask} deleteTask={deleteTask}/>
+    //         ))
+    //       }
+    //     </div>
+    //   );
+    // }
+    // ReactDOM.render(<TaskManager />, document.getElementById("root"));
+  </script>
+</html>
