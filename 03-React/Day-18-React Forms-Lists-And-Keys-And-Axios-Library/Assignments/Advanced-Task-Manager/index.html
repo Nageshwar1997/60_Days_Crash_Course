@@ -4,6 +4,188 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Template</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #root {
+        border: 1px solid black;
+        width: calc(100% - 20px);
+        padding: 10px;
+        & > .App {
+          border: 1px solid red;
+          width: calc(100% - 20px);
+          & > nav {
+            border: 1px solid green;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            & > button {
+              width: 250px;
+              font-size: 18px;
+              height: 40px;
+              border-radius: 6px;
+              border: 1px solid black;
+            }
+          }
+          & > div {
+            width: 100%;
+            border: 1px solid blue;
+            display: flex;
+            justify-content: left;
+            gap: 30px;
+            & > form {
+              border: 1px solid purple;
+              display: flex;
+              flex-direction: column;
+              margin-top: 30px;
+              margin-left: 20px;
+              margin-bottom: 20px;
+              width: 20%;
+              box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+              padding: 30px;
+              & > label,
+              div > label {
+                font-size: 20px;
+                color: #2b619e;
+              }
+              & > div {
+                padding-bottom: 5px;
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                gap: 15px;
+              }
+              & input[type="text"] {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                resize: vertical;
+                font-size: 18px;
+              }
+              & input[type="submit"] {
+                background-color: #2b619e;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 20px;
+                margin-top: 20px;
+              }
+              & input[type="checkbox"] {
+                width: 20px;
+                height: 20px;
+              }
+
+              & input[type="submit"]:hover {
+                background-color: #3973b6;
+              }
+              & select {
+                width: 100%;
+                padding: 12px;
+                height: 49px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                font-size: 16px;
+                resize: vertical;
+                & > option {
+                  font-size: 16px;
+                }
+              }
+            }
+            & > #tasksDiv {
+              border: 1px solid orange;
+              width: calc(100% - 20px);
+              & > table {
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                margin: auto;
+                margin-top: 30px;
+                text-align: center;
+                text-transform: capitalize;
+                & .save,
+                .edit,
+                .delete {
+                  font-size: 16px;
+                  background-color: #3973b6;
+                  color: white;
+                  padding: 5px 15px;
+                  border: none;
+                  border-radius: 15px;
+                  cursor: pointer;
+                  width: 70%;
+                  font-size: 16px;
+                }
+                & .save:hover,
+                .edit:hover {
+                  background-color: #3657a9;
+                }
+                & .delete:hover {
+                  background-color: #f44336;
+                }
+              }
+
+              & table td,
+              table th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+              }
+
+              & table tr:nth-child(even) {
+                background-color: #8caacf;
+              }
+
+              & table tr:hover {
+                background-color: #ddd;
+              }
+
+              & table th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #0468aa;
+                color: white;
+                text-align: center;
+              }
+            }
+            & table {
+              & input[type="text"],
+              select {
+                width: 170px;
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 16px;
+              }
+
+              & input[type="checkbox"] {
+                width: 20px;
+                height: 20px;
+                background-color: red;
+              }
+            }
+          }
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -17,32 +199,110 @@
 
     function App() {
       const [tasks, setTasks] = React.useState([]);
+      const [showTasks, setShowTasks] = React.useState(true);
+      const [showIncompleteTasks, setShowIncompleteTasks] =
+        React.useState(false);
+      const [edit, setEdit] = React.useState(false);
+      const [selectedTaskId, setSelectedTaskId] = React.useState(null);
+      const [incompleteTasks, setIncompleteTasks] = React.useState([]);
 
-      function AddTask({ task }) {
-        console.log(task);
+      function AddTask({ task, index }) {
+        let priorities = ["High", "Medium", "Low"];
         return (
           <tr>
-            <td></td>
+            <td>{index + 1}</td>
             <td>
-              <input type="text" />
+              {edit && selectedTaskId === task.id ? (
+                <input
+                  className="tableTitleInput"
+                  type="text"
+                  value={task.title}
+                  onChange={(e) => handleInputChange(e, "title", task.id)}
+                />
+              ) : (
+                task.title
+              )}
             </td>
             <td>
-              <input type="text" />
+              {edit && selectedTaskId === task.id ? (
+                <input
+                  type="text"
+                  value={task.assignee}
+                  onChange={(e) => handleInputChange(e, "assignee", task.id)}
+                />
+              ) : (
+                task.assignee
+              )}
             </td>
             <td>
-              <select>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-              </select>
+              {edit && selectedTaskId === task.id ? (
+                <select
+                  value={task.priority}
+                  onChange={(e) => handleInputChange(e, "priority", task.id)}
+                >
+                  {priorities.map((priority, i) => {
+                    return (
+                      <option key={i} value={priority}>
+                        {priority}
+                      </option>
+                    );
+                  })}
+                </select>
+              ) : (
+                task.priority
+              )}
             </td>
             <td>
-              <input type="checkbox" />
+              {edit && selectedTaskId === task.id ? (
+                <input
+                  type="checkbox"
+                  checked={task.isCompleted}
+                  onChange={() => handleCheckboxChange(task.id)}
+                />
+              ) : (
+                <input type="checkbox" checked={task.isCompleted} readOnly />
+              )}
             </td>
             <td>
-              <button>Delete</button>
+              {selectedTaskId === task.id ? (
+                <button className="save" onClick={() => handleSave(task.id)}>
+                  Save
+                </button>
+              ) : (
+                <button className="edit" onClick={() => handleEdit(task.id)}>
+                  Edit
+                </button>
+              )}
+            </td>
+            <td>
+              <button className="delete" onClick={() => handleDelete(task.id)}>
+                Delete
+              </button>
             </td>
           </tr>
+        );
+      }
+
+      function RenderTasks({ tasks }) {
+        return (
+          <table>
+            <thead>
+              <tr>
+                <th>S.N</th>
+                <th>Task</th>
+                <th>Assignee</th>
+                <th>Priority</th>
+                <th>Completed</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tasks.map((task, index) => {
+                return <AddTask key={index} task={task} index={index} />;
+              })}
+            </tbody>
+          </table>
         );
       }
 
@@ -58,17 +318,99 @@
         }
       }
 
-      function handleSubmit(event) {
+      function handleInputChange(event, field, taskId) {
+        const { value } = event.target;
+        setTasks(
+          tasks.map((task) => {
+            if (task.id === taskId) {
+              return { ...task, [field]: value };
+            }
+            return task;
+          })
+        );
+      }
+
+      function handleCheckboxChange(taskId) {
+        setTasks(
+          tasks.map((task) => {
+            if (task.id === taskId) {
+              return { ...task, isCompleted: !task.isCompleted };
+            }
+            return task;
+          })
+        );
+      }
+
+      function handleEdit(taskId) {
+        setEdit(true);
+        setSelectedTaskId(taskId);
+      }
+
+      async function handleSave(taskId) {
+        setEdit(false);
+        setSelectedTaskId(null);
+
+        const updatedTask = tasks.find((task) => task.id === taskId);
+
+        try {
+          await axios({
+            method: "put",
+            url: `http://localhost:3000/todos/${taskId}`,
+            data: updatedTask,
+          });
+
+          setTasks(
+            tasks.map((task) => (task.id === taskId ? updatedTask : task))
+          );
+          console.log("Task Updated Successfully");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      async function handleDelete(taskId) {
+        try {
+          await axios({
+            method: "delete",
+            url: `http://localhost:3000/todos/${taskId}`,
+          });
+
+          setTasks(tasks.filter((task) => task.id !== taskId));
+          console.log("Task Deleted Successfully");
+        } catch (error) {
+          console.log(error);
+          console.log("Task Deletion Failed");
+        }
+      }
+
+      function handleIncompleteTasks() {
+        const incompleteTasks = tasks.filter((task) => {
+          return task.isCompleted == false;
+        });
+        console.log(incompleteTasks);
+        setIncompleteTasks(incompleteTasks);
+        setShowTasks(false);
+        setShowIncompleteTasks(true);
+        setEdit(!edit);
+      }
+
+      function handleShowAllTasks() {
+        setShowTasks(true);
+        setShowIncompleteTasks(false);
+        setEdit(!edit);
+      }
+
+      async function handleSubmit(event) {
         event.preventDefault();
 
         let task = {
+          id: Math.floor(Math.random() * 10000) + 1,
           title: event.target[0].value,
+          priority: event.target[1].value,
           assignee: event.target[2].value,
-          priority: event.target[3].value,
-          completed: event.target[4].checked,
+          isCompleted: event.target[3].checked,
         };
 
-        async function postTask() {
           try {
             let resp = await axios({
               method: "post",
@@ -81,8 +423,6 @@
           }
         }
 
-        postTask();
-      }
 
       React.useEffect(() => {
         fetchTasks();
@@ -90,45 +430,36 @@
       return (
         <div className="App">
           <nav>
-            <button>Get All Tasks</button>
-            <button>Show Incomplete Tasks</button>
+            <button onClick={() => handleShowAllTasks()}>Get All Tasks</button>
+            <button onClick={() => handleIncompleteTasks()}>
+              Show Incomplete Tasks
+            </button>
           </nav>
           <div>
             <form onSubmit={(e) => handleSubmit(e)}>
               <label>Task Title</label>
               <input type="text" />
-              <label>Completed</label>
-              <input type="checkbox" />
-              <label>Assignee</label>
-              <input type="text" />
               <label>Priority</label>
-              <select>
+              <select id="priority">
                 <option value="">Select Priority</option>
                 <option value="High">High</option>
-                <option value="Medium">Mid</option>
+                <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
               </select>
+              <label>Assignee</label>
+              <input type="text" />
+              <div id="checkboxDiv">
+                <label>Completed</label>
+                <input type="checkbox" />
+              </div>
               <input type="submit" value="Add Task" />
             </form>
-            <div>
-              <table>
-                <thead>
-                  <tr>
-                    <th>S.N</th>
-                    <th>Task</th>
-                    <th>Assignee</th>
-                    <th>Priority</th>
-                    <th>Completed</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tasks.map((task, index) => {
-                    return <AddTask key={index} />;
-                  })}
-                </tbody>
-              </table>
+            <div id="tasksDiv">
+              {showTasks ? (
+                <RenderTasks tasks={tasks} />
+              ) : showIncompleteTasks ? (
+                <RenderTasks tasks={incompleteTasks} />
+              ) : null}
             </div>
           </div>
         </div>
@@ -136,156 +467,5 @@
     }
 
     ReactDOM.render(<App />, document.getElementById("root"));
-
-    // function TaskForm() {
-    //   const [title, setTitle] = React.useState("");
-    //   const [isCompleted, setIsCompleted] = React.useState(false);
-    //   const [assignee, setAssignee] = React.useState("");
-
-    //   const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     addTask({ title, isCompleted, assignee });
-    //     setTitle("");
-    //     setIsCompleted(false);
-    //     setAssignee("");
-    //   };
-
-    //   return (
-    //     <form onSubmit={(e) => handleSubmit(e)}>
-    //       <input
-    //         type="text"
-    //         value={title}
-    //         onChange={(e) => setTitle(e.target.value)}
-    //         placeholder="Enter Task"
-    //         required
-    //       />
-    //       <input
-    //         type="checkbox"
-    //         checked={isCompleted}
-    //         onChange={(e) => setIsCompleted(e.target.checked)}
-    //       />
-    //       <input
-    //         type="text"
-    //         value={assignee}
-    //         onChange={(e) => setAssignee(e.target.value)}
-    //         placeholder="Assignee"
-    //       />
-    //       <button type="submit">Add Task</button>
-    //     </form>
-    //   );
-    // }
-
-    // function Task({ task, updateTask, deleteTask }) {
-    //   const handleUpdate = (updates) => {
-    //     updateTask(task.id, updates);
-    //   };
-    //   return (
-    //     <div>
-    //       <input
-    //         type="text"
-    //         value={task.title}
-    //         onChange={(e) => handleUpdate({ title: e.target.value })}
-    //       />
-    //       <input
-    //         type="checkbox"
-    //         checked={task.isCompleted}
-    //         onChange={(e) => handleUpdate({ isCompleted: e.target.checked })}
-    //       />
-    //       <input
-    //         type="text"
-    //         value={task.assignee}
-    //         onChange={(e) => handleUpdate({ assignee: e.target.value })}
-    //       />
-    //       <button onClick={() => deleteTask(task.id)}>Delete</button>
-    //     </div>
-    //   );
-    // }
-
-    // function TaskManager() {
-    //   const [tasks, setTasks] = React.useState([]);
-    //   const [showIncomplete, setShowIncomplete] = React.useState(false);
-    //   const [loading, setLoading] = React.useState(false);
-    //   const [error, setError] = React.useState(false);
-
-    //   const fetchTasks = async () => {
-    //     setLoading(true);
-    //     try {
-    //       let resp = await axios({
-    //         method: "get",
-    //         url: "http://localhost:3000/todos",
-    //       });
-    //       setTasks(resp.data);
-    //       setLoading(false);
-    //       setError(false);
-    //     } catch (error) {
-    //       setLoading(false);
-    //       setError(true);
-    //       console.log(error);
-    //     }
-    //   };
-
-    //   const addTask = async (newTask) => {
-    //     console.log(newTask);
-    //     try {
-    //       let resp = await axios({
-    //         method: "post",
-    //         url: "http://localhost:3000/todos",
-    //         data: newTask,
-    //       });
-    //       fetchTasks();
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   };
-
-    //   const updateTask = async (taskId, updates) => {
-    //     try {
-    //       let resp = await axios({
-    //         method: "put",
-    //         url: `http://localhost:3000/todos/${taskId}`,
-    //         data: updates,
-    //       });
-    //       fetchTasks();
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   };
-
-    //   const deleteTask = async (taskId) => {
-    //     try {
-    //       let resp = await axios({
-    //         method: "delete",
-    //         url: `http://localhost:3000/todos/${taskId}`,
-    //       });
-    //       fetchTasks();
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   };
-
-    //   const toggleShowIncomplete = () => {
-    //     setShowIncomplete(!showIncomplete);
-    //   };
-
-    //   let filteredTasks = showIncomplete
-    //     ? tasks.filter((task) => !task.completed)
-    //     : tasks;
-
-    //   return (
-    //     <div>
-    //       <TaskForm addTask={addTask} />
-    //       <button onClick={fetchTasks}>Get all Tasks</button>
-    //       <button onClick={toggleShowIncomplete}>
-    //         {showIncomplete ? "Show All Tasks" : "Show Incomplete Tasks"}
-    //       </button>
-    //       {
-    //         filteredTasks.map((task, index) => (
-    //           <Task key={index} task={task} updateTask={updateTask} deleteTask={deleteTask}/>
-    //         ))
-    //       }
-    //     </div>
-    //   );
-    // }
-    // ReactDOM.render(<TaskManager />, document.getElementById("root"));
   </script>
 </html>
