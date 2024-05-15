@@ -206,6 +206,118 @@
       const [selectedTaskId, setSelectedTaskId] = React.useState(null);
       const [incompleteTasks, setIncompleteTasks] = React.useState([]);
 
+      function handleInputChange(event, field, taskId) {
+        const { value } = event.target;
+        setTasks((prevTasks) => {
+          return prevTasks.map((task) => {
+            if (task.id === taskId) {
+              return { ...task, [field]: value };
+            }
+            return task;
+          });
+        });
+      }
+
+      function handleCheckboxChange(taskId) {
+        setTasks((prevTasks) => {
+          return prevTasks.map((task) => {
+            if (task.id === taskId) {
+              return { ...task, isCompleted: !task.isCompleted };
+            }
+            return task;
+          });
+        });
+      }
+
+      function handleEdit(taskId) {
+        setEdit(true);
+        setSelectedTaskId(taskId);
+      }
+
+      async function handleSave(taskId) {
+        setEdit(false);
+        setSelectedTaskId(null);
+
+        const updatedTask = tasks.find((task) => task.id === taskId);
+
+        try {
+          await axios({
+            method: "put",
+            url: `http://localhost:3000/todos/${taskId}`,
+            data: updatedTask,
+          });
+
+          setTasks((prevTasks) =>
+            prevTasks.map((task) => (task.id === taskId ? updatedTask : task))
+          );
+          console.log("Task Updated Successfully");
+        } catch (error) {
+          console.log(error);
+        }
+        finally {
+          setEdit(false);
+          setSelectedTaskId(null);
+        }
+      }
+
+      async function handleDelete(taskId) {
+        console.log(taskId);
+        try {
+          await axios({
+            method: "delete",
+            url: `http://localhost:3000/todos/${taskId}`,
+          });
+
+          setTasks((prevTasks) => {
+            return prevTasks.filter((task) => task.id !== taskId);
+          });
+          console.log("Task Deleted Successfully");
+        } catch (error) {
+          console.log(error);
+          console.log("Task Deletion Failed");
+        }
+      }
+
+      function handleIncompleteTasks() {
+        const incompleteTasks = tasks.filter((task) => {
+          return !task.isCompleted;
+        });
+        // console.log(incompleteTasks);
+        setIncompleteTasks(incompleteTasks);
+        setShowTasks(false);
+        setShowIncompleteTasks(true);
+        setEdit(false);
+      }
+
+      function handleShowAllTasks() {
+        setShowTasks(true);
+        setShowIncompleteTasks(false);
+        setEdit(false);
+      }
+
+      async function handleSubmit(event) {
+        event.preventDefault();
+
+        let newTask = {
+          id: Math.floor(Math.random() * 10000) + 1,
+          title: event.target[0].value,
+          priority: event.target[1].value,
+          assignee: event.target[2].value,
+          isCompleted: event.target[3].checked,
+        };
+
+        try {
+          await axios({
+            method: "post",
+            url: "http://localhost:3000/todos",
+            data: newTask,
+          });
+          setTasks((prevTasks) => [...prevTasks, newTask]);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
       function AddTask({ task, index }) {
         let priorities = ["High", "Medium", "Low"];
         return (
@@ -318,125 +430,19 @@
         }
       }
 
-      function handleInputChange(event, field, taskId) {
-        const { value } = event.target;
-        setTasks(
-          tasks.map((task) => {
-            if (task.id === taskId) {
-              return { ...task, [field]: value };
-            }
-            return task;
-          })
-        );
-      }
-
-      function handleCheckboxChange(taskId) {
-        setTasks(
-          tasks.map((task) => {
-            if (task.id === taskId) {
-              return { ...task, isCompleted: !task.isCompleted };
-            }
-            return task;
-          })
-        );
-      }
-
-      function handleEdit(taskId) {
-        setEdit(true);
-        setSelectedTaskId(taskId);
-      }
-
-      async function handleSave(taskId) {
-        setEdit(false);
-        setSelectedTaskId(null);
-
-        const updatedTask = tasks.find((task) => task.id === taskId);
-
-        try {
-          await axios({
-            method: "put",
-            url: `http://localhost:3000/todos/${taskId}`,
-            data: updatedTask,
-          });
-
-          setTasks(
-            tasks.map((task) => (task.id === taskId ? updatedTask : task))
-          );
-          console.log("Task Updated Successfully");
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
-      async function handleDelete(taskId) {
-        try {
-          await axios({
-            method: "delete",
-            url: `http://localhost:3000/todos/${taskId}`,
-          });
-
-          setTasks(tasks.filter((task) => task.id !== taskId));
-          console.log("Task Deleted Successfully");
-        } catch (error) {
-          console.log(error);
-          console.log("Task Deletion Failed");
-        }
-      }
-
-      function handleIncompleteTasks() {
-        const incompleteTasks = tasks.filter((task) => {
-          return task.isCompleted == false;
-        });
-        console.log(incompleteTasks);
-        setIncompleteTasks(incompleteTasks);
-        setShowTasks(false);
-        setShowIncompleteTasks(true);
-        setEdit(!edit);
-      }
-
-      function handleShowAllTasks() {
-        setShowTasks(true);
-        setShowIncompleteTasks(false);
-        setEdit(!edit);
-      }
-
-      async function handleSubmit(event) {
-        event.preventDefault();
-
-        let task = {
-          id: Math.floor(Math.random() * 10000) + 1,
-          title: event.target[0].value,
-          priority: event.target[1].value,
-          assignee: event.target[2].value,
-          isCompleted: event.target[3].checked,
-        };
-
-          try {
-            let resp = await axios({
-              method: "post",
-              url: "http://localhost:3000/todos",
-              data: task,
-            });
-            setTasks([...tasks, task]);
-          } catch (error) {
-            console.log(error);
-          }
-        }
-
-
       React.useEffect(() => {
         fetchTasks();
       }, []);
       return (
         <div className="App">
           <nav>
-            <button onClick={() => handleShowAllTasks()}>Get All Tasks</button>
-            <button onClick={() => handleIncompleteTasks()}>
+            <button onClick={handleShowAllTasks}>Get All Tasks</button>
+            <button onClick={handleIncompleteTasks}>
               Show Incomplete Tasks
             </button>
           </nav>
           <div>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={handleSubmit}>
               <label>Task Title</label>
               <input type="text" />
               <label>Priority</label>

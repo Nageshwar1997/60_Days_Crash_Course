@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/babel">
+    function TaskManager() {
+      const [tasks, setTasks] = React.useState([
+        {
+          id: Math.floor(Math.random() * 10000) + 1,
+          title: "",
+          priority: "",
+          assignee: "",
+          isCompleted: false,
+        },
+      ]);
+      const [showIncompleteTasks, setShowIncompleteTasks] =
+        React.useState(false);
+      const [showAllTasks, setShowAllTasks] = React.useState(true);
+
+      // Functions
+      async function fetchTasks() {
+        try {
+          const resp = await axios({
+            method: "get",
+            url: "http://localhost:3000/todos",
+          });
+
+          // console.log(resp.data);
+          setTasks((prev) => [...prev, ...resp.data]);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      // Components
+      function FormData({ tasks }) {
+        console.log(tasks);
+        return (
+          <form>
+            <div>
+              <label>Task Title</label>
+              <input type="text" name="title" />
+            </div>
+            <div>
+              <label>Task Assignee</label>
+              <input type="text" name="assignee" />
+            </div>
+            <div>
+              <label>Task Priority</label>
+              <select name="priority">
+                <option value="">Select Priority</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+            <div>
+              <label>Task Completed</label>
+              <input type="checkbox" name="isCompleted" />
+            </div>
+            <div>
+              <input type="submit" value="Add Task" />
+            </div>
+          </form>
+        );
+      }
+
+      React.useEffect(() => {
+        fetchTasks();
+      }, []);
+
+      return (
+        <div id="container">
+          <nav id="top">
+            <button>Show All Tasks</button>
+            <button>Show Incomplete Tasks</button>
+          </nav>
+          <div id="bottom">
+            <FormData tasks={tasks} />
+            <table></table>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<TaskManager />, document.getElementById("root"));
+  </script>
+</html>
