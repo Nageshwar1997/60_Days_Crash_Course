@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create UI with React API</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const ReactFragmentExample1 = () => (
+        <React.Fragment>
+          <strong>Before Modification</strong>
+          <p>React is a javascript library</p>
+          <div className="main">
+            <p>Click the below button to alert Hello</p>
+            <button onClick={() => alert("Hello")}>Alert Hello</button>
+          </div>
+        </React.Fragment>
+      );
+
+      // 1. Modify the Example: Change the class name of the `div` to `"container"` and update the button text to `"Show Alert"` . Implement the change and observe the behavior.
+      // 2. Experiment with Inline Styling: Add inline styling to the `p` elements to change their text color and font size.
+      // 3. Create a New Component: Using the concepts learned, create a new React component that includes an `input` field and a button. The button click should display the input field's value using an alert.
+
+      let inputValue = "";
+      const AlertComponent = () => {
+        function handleOnChange(event) {
+          console.log(event.target.value);
+          inputValue = event.target.value;
+        }
+        function showAlert(value) {
+          alert(value);
+        }
+        return (
+          <div>
+            <input
+              onChange={handleOnChange}
+              type="text"
+              placeholder="Enter Text"
+            />
+            <button onClick={() => showAlert(inputValue)}>
+              Show Input Alert
+            </button>
+          </div>
+        );
+      };
+
+      const ReactFragmentExample2 = () => (
+        <React.Fragment>
+          <strong>After Modification</strong>
+          <p style={{ color: "red", fontSize: "20px" }}>
+            React is a javascript library
+          </p>
+          <div className="container">
+            <p>Click the below button to alert Hello</p>
+            <button onClick={() => alert("I'm Clicked")}>Show Alert</button>
+          </div>
+        </React.Fragment>
+      );
+      ReactDOM.render(
+        <>
+          <ReactFragmentExample1 />
+          <ReactFragmentExample2 />
+          <AlertComponent />
+        </>,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>
