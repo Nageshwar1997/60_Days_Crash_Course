@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create UI with React API</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      let root = document.getElementById("root");
+
+      function Button(props) {
+        const { text, disabled, onclick } = props;
+        const button = document.createElement("button");
+
+        button.textContent = text;
+        button.disabled = disabled;
+        button.onclick = onclick;
+
+        return button;
+      }
+
+      function Header(props) {
+        const { text, level } = props;
+
+        const header = document.createElement(`h${level}`);
+        header.textContent = text;
+
+        return header;
+      }
+
+      const header = Header({
+        text: "Counter : 0",
+        level: 1,
+      });
+      const addBtn = Button({
+        text: "Add",
+        disabled: false,
+        onclick: () => alert("Clicked Add"),
+      });
+
+      const reduceBtn = Button({
+        text: "Reduce",
+        disabled: false,
+        onclick: () => alert("Clicked Reduce"),
+      });
+
+      root.append(header, addBtn, reduceBtn);
+    </script>
+  </body>
+</html>

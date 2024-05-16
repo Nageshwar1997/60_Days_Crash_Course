@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create UI with React API</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      let root = document.getElementById("root");
+
+      function Button(props) {
+        const { text, onClick, color, bgColor } = props;
+        return (
+          <button
+            style={{ color: color, backgroundColor: bgColor }}
+            onClick={onClick}
+          >
+            {text}
+          </button>
+        );
+      }
+
+      function Header(props) {
+        const { text } = props;
+        return <h1>{text}</h1>;
+      }
+
+      let btn1 = true;
+      let btn2 = false;
+      const elements = (
+        <>
+          <Header text="Counter : 0" />
+          <Button
+            text={btn1 ? "Add" : "Reduce"}
+            onClick={() => alert("Clicked Add")}
+            color="red"
+            bgColor="green"
+          />
+          <Button
+            text={btn2 ? "Add" : "Reduce"}
+            onClick={() => alert("Clicked Reduce")}
+            color="blue"
+            bgColor="yellow"
+          />
+        </>
+      );
+
+      ReactDOM.render(elements, root);
+    </script>
+  </body>
+</html>
