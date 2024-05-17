@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <script type="text/babel">
+    // Your code will go here
+
+    const App = () => {
+      const [data, setData] = React.useState([]);
+
+      function getTodo1() {
+        return axios.get("https://jsonplaceholder.typicode.com/todos/1");
+      }
+      function getTodo2() {
+        return axios.get("https://jsonplaceholder.typicode.com/todos/2");
+      }
+
+      axios.all([getTodo1(), getTodo2()]).then(
+        axios.spread((acct, perms) => {
+          console.log(acct.data);
+          console.log(perms.data);
+          setData([acct.data, perms.data]);
+        })
+      );
+
+      return (
+        <div>
+          <code>
+            <pre>{JSON.stringify(data, null, 3)}</pre>
+          </code>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</html>

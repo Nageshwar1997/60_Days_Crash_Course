@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <script type="text/babel">
+    // Your code will go here
+
+    const App = () => {
+      const [data, setData] = React.useState([]);
+      async function fetchData() {
+        try {
+          const resp = await axios.get(
+            "https://jsonplaceholder.typicode.com/todos"
+          );
+          console.log(resp.data);
+          setData(resp.data);
+        } catch (error) {
+          console.log(error);
+        }
+        // finally {
+        //   console.log("finally");
+        // } // optional
+      }
+
+      fetchData();
+
+      return (
+        <div>
+          <code>
+            <pre>{JSON.stringify(data, null, 3)}</pre>
+          </code>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</html>

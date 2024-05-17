@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "firstName": "Nageshwar",
+      "lastName": "Pawar",
+      "age": "27",
+      "isMarried": true,
+      "id": "6698"
+    },
+    {
+      "firstName": "Santosh",
+      "lastName": "Pawar",
+      "age": "22",
+      "isMarried": false,
+      "id": "4217"
+    },
+    {
+      "id": "57e4",
+      "firstName": "Sanket",
+      "lastName": "Pawar",
+      "age": "25",
+      "isMarried": false
+    },
+    {
+      "id": "a098",
+      "firstName": "Madhav",
+      "lastName": "Pawar",
+      "age": "25",
+      "isMarried": false
+    }
+  ]
+}

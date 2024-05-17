@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <script type="text/babel">
+    const App = () => {
+      const [data, setData] = React.useState([]);
+
+      async function fetchData() {
+        try {
+          const resp = await axios.get("http://localhost:3000/users");
+          console.log(resp.data);
+          setData(resp.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      async function handleSubmit(e) {
+        e.preventDefault();
+
+        let targetElements = e.target.elements;
+        console.log(targetElements);
+
+        let user = {
+          firstName: targetElements.firstName.value,
+          lastName: targetElements.lastName.value,
+          age: targetElements.age.value,
+          isMarried: targetElements.isMarried.checked,
+        };
+
+        // Check if user already exists
+        const existingUser = data.find(
+          (u) =>
+            u.firstName === user.firstName && u.lastName === user.lastName
+        );
+
+        if (existingUser) {
+          // User exists, update using PUT
+          axios({
+            method: "put",
+            url: `http://localhost:3000/users/${existingUser.id}`,
+            data: user,
+          })
+            .then((resp) => {
+              setData((prevData) =>
+                prevData.map((u) =>
+                  u.id === existingUser.id ? resp.data : u
+                )
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          // User does not exist, create new using POST
+          axios({
+            method: "post",
+            url: "http://localhost:3000/users",
+            data: user,
+          })
+            .then((resp) => {
+              setData((prevData) => [...prevData, resp.data]);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      }
+
+      React.useEffect(() => {
+        fetchData();
+      }, []);
+
+      return (
+        <div>
+          <form onSubmit={handleSubmit}>
+            <input
+              name="firstName"
+              id="firstName"
+              type="text"
+              placeholder="Enter First Name"
+            />
+            <input
+              name="lastName"
+              id="lastName"
+              type="text"
+              placeholder="Enter Last Name"
+            />
+            <input name="age" id="age" type="number" placeholder="Enter Age" />
+            <label>
+              {" "}
+              isMarried:{" "}
+              <input name="isMarried" id="isMarried" type="checkbox" />
+            </label>
+            <input type="submit" value="Add User" />
+          </form>
+          <code>
+            <pre>{JSON.stringify(data, null, 3)}</pre>
+          </code>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</html>
