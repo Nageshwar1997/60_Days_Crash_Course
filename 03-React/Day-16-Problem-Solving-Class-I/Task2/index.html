@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+      const rootElement = document.getElementById("root");
+      const reactRoot = ReactDOM.createRoot(rootElement);
+
+      const App = () => {
+        const [data, setData] = useState([]);
+
+        useEffect(() => {
+          const fetchUsers = async () => {
+            try {
+              const resp = await fetch(`http://localhost:3000/users`);
+              const result = await resp.json();
+              console.log(result);
+              setData(result);
+            } catch (error) {
+              console.error(error);
+            }
+          };
+          fetchUsers();
+        }, []);
+
+        const ShowUsers = ({ users }) => {
+          return (
+            <div>
+              <ul>
+                {users.map((user) => (
+                  <li key={user.id}>{user.name}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        };
+
+        return (
+          <div>
+            <ShowUsers users={data} />
+          </div>
+        );
+      };
+
+      reactRoot.render(<App />);
+    </script>
+  </body>
+</html>

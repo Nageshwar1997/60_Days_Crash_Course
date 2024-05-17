@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX and Babel</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const fruits = ["Apple", "Mango", "Banana", "Kiwi", "Orange"];
+      const vegetables = ["Potato", "Tomato", "Cabbage", "Onion"];
+      function DisplayList({ list, title }) {
+        // Returns items in list in the form of ordered list
+        // console.log(list);
+        return (
+          <div>
+            <h1>{title}</h1>
+            <ol>
+              {list.map((item, i) => (
+                <li key={i}>
+                  <strong>{item}</strong>
+                </li>
+              ))}
+            </ol>
+          </div>
+        );
+      }
+      function App() {
+        return (
+          <div>
+            <DisplayList list={fruits} title="Fruits List" />
+            <DisplayList list={vegetables} title="Vegetables List" />
+          </div>
+        );
+      }
+      const rootElement = document.getElementById("root");
+      const reactRoot = ReactDOM.createRoot(rootElement);
+      reactRoot.render(<App />);
+    </script>
+  </body>
+</html>
