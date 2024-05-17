@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example 03</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your code will go here
+
+    const Counter = () => {
+      const [inputValue, setInputValue] = React.useState("");
+
+      const handleInputChange = (event) => {
+        console.log(event.target.value);
+        setInputValue(event.target.value);
+      };
+
+      return (
+        <div>
+          <h1>{inputValue}</h1>
+          <input
+            value={inputValue}
+            onChange={handleInputChange}
+            type="text"
+            placeholder="Enter Your Name"
+          />
+        </div>
+      );
+    };
+
+    ReactDOM.render(<Counter />, document.getElementById("root"));
+  </script>
+</html>
