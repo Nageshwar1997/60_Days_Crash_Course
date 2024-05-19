@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Example 03</title>
+    <title>Example 05</title>
   </head>
   <body>
     <div id="root"></div>
@@ -13,25 +13,21 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     // Your code will go here
-
-    const App = () => {
-      const [name, setName] = React.useState("");
-
-      const handleInputChange = (event) => {
-        console.log(event.target.value);
-        setName(event.target.value);
-      };
-
+    const Counter = () => {
+      const [count, setCount] = React.useState(0);
       return (
         <div>
-          <h1>{name}</h1>
-          <input
-            value={name}
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Enter Your Name"
-          />
-          <button onClick={() => setName("")}>RESET</button>
+          <h1>Count :{count}</h1>
+          <button onClick={() => setCount(count + 1)}>Increase Count</button>
+        </div>
+      );
+    };
+
+    const App = () => {
+      return (
+        <div>
+          <Counter />
+          <Counter />
         </div>
       );
     };

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Example 03</title>
+    <title>Example 04</title>
   </head>
   <body>
     <div id="root"></div>
@@ -16,22 +16,48 @@
 
     const App = () => {
       const [name, setName] = React.useState("");
-
+      const [age, setAge] = React.useState("");
+      const [isSingle, setIsSingle] = React.useState(true);
       const handleInputChange = (event) => {
-        console.log(event.target.value);
+        console.log("Name", event.target.value);
         setName(event.target.value);
       };
 
+      const handleAgeChange = (event) => {
+        console.log("Age", event.target.value);
+        setAge(event.target.value);
+      };
+
+      const handleCheckboxChange = (event) => {
+        // console.log("Checkbox", event.target.checked);
+        // setIsSingle(event.target.checked);
+        // OR
+        setIsSingle(!isSingle);
+      };
       return (
         <div>
-          <h1>{name}</h1>
           <input
             value={name}
             onChange={handleInputChange}
             type="text"
             placeholder="Enter Your Name"
           />
-          <button onClick={() => setName("")}>RESET</button>
+          <hr/>
+          <input
+          value={age}
+          onChange={handleAgeChange}
+          type="number"
+          placeholder="Enter Your Age"
+          />
+          <hr/>
+          <label>
+            IsSingle :{" "}
+            <input
+              type="checkbox"
+              onChange={handleCheckboxChange}
+              checked={isSingle}
+            />
+          </label>
         </div>
       );
     };
