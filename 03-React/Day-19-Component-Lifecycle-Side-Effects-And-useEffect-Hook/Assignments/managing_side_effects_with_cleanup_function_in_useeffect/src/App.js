@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import TimerComponent from "./components/TimerComponent";
+import ScrollComponent from "./components/ScrollComponent";
+import "./App.css";
 
 function App() {
+  const [showTimer, setShowTimer] = useState(true);
+  const [showScroll, setShowScroll] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="App-header">
+        <h1>useEffect Cleanup Example</h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "100px",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <button
+            style={{
+              width: "200px",
+              height: "50px",
+              borderRadius: "5px",
+              backgroundColor: showTimer ? "lightgreen" : "tomato",
+            }}
+            onClick={() => setShowTimer(!showTimer)}
+          >
+            {showTimer ? "Hide Timer" : "Show Timer"}
+          </button>
+          <button
+            style={{
+              width: "200px",
+              height: "50px",
+              borderRadius: "5px",
+              backgroundColor: showScroll ? "lightgreen" : "tomato",
+            }}
+            onClick={() => setShowScroll(!showScroll)}
+          >
+            {showScroll ? "Hide Scroll" : "Show Scroll"}
+          </button>
+        </div>
+        {showTimer && <TimerComponent />}
+        {showScroll && <ScrollComponent />}
+      </div>
   );
 }
 
