@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Example 02</title>
+    <title>Example 01</title>
   </head>
   <body>
     <div id="root"></div>
@@ -18,25 +18,22 @@
   ></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    // To pass some information from child to parent
-
-    function Child({ getName }) {
-      let name = "Nageshwar";
-      getName(name)
+    // Parent To Child
+    function Child({ name }) {
       return (
         <div>
           <h2>Child</h2>
+          <p>{name}</p>
         </div>
       );
     }
     function Parent() {
-      function getName(name) {
-        console.log("In parent component i have access of the name", name);
-      }
+      const name = "Nageshwar";
       return (
         <div>
           <h1>Parent</h1>
-          <Child getName={getName} />
+          <p>Pundlikrao</p>
+          <Child name={name} />
         </div>
       );
     }
