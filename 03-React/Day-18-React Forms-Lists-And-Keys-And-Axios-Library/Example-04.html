@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example 04</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your code will go here
+
+    function FruitsList(props) {
+      // console.log(props);
+      const { fruits } = props;
+      return (
+        <div>
+          <h1>Fruits List</h1>
+          <ul>
+            {fruits.map((fruit, i) => (
+              <li key={i}>{fruit}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    function VegetablesList(props) {
+    //   console.log(props);
+      return (
+        <div>
+          <h1>Vegetables List</h1>
+          <ol>
+            {Object.values(props).map((vegetable, i) => (
+              <li key={i}>{vegetable}</li>
+            ))}
+          </ol>
+        </div>
+      );
+    }
+
+    function App() {
+      const fruits = ["apple", "banana", "orange", "kiwi"];
+      const vegetables = ["carrot", "celery", "pepper", "lettuce"];
+      return (
+        <div>
+          <FruitsList fruits={fruits} />
+          <VegetablesList {...vegetables} />
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</html>

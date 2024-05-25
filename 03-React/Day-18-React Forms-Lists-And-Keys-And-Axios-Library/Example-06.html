@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example 06</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script type="text/babel">
+      function UserCard(props) {
+        const { id, name, username, website, email } = props;
+
+        return (
+          <div
+            style={{
+              padding: "5px",
+              border: "1px solid black",
+              textAlign: "left",
+            }}
+          >
+            <p>
+              <strong>Id: </strong>
+              {id}
+            </p>
+            <p>
+              <strong>Name: </strong>
+              {name}
+            </p>
+            <p>
+              <strong>Username: </strong>
+              {username}
+            </p>
+            <p>
+              <strong>Website: </strong>
+              {website}
+            </p>
+            <p>
+              <strong>Email:</strong>
+              {email}
+            </p>
+          </div>
+        );
+      }
+
+      function App() {
+        const [users, setUsers] = React.useState([]);
+
+        // function fetchAndUpdateData() {
+        //   console.log("Fetching Data From Server");
+
+        //   axios
+        //     .get("https://jsonplaceholder.typicode.com/users")
+        //     .then((initialData) => {
+        //       const finalData = initialData.data;
+        //       console.log(finalData);
+        //       setUsers(finalData);
+        //     })
+        //     .catch((error) => {
+        //       console.log(error);
+        //     });
+        // }
+
+        // OR
+
+        async function fetchAndUpdateData() {
+          console.log("Fetching Data From Server");
+          try {
+            const resp = await axios.get(
+              "https://jsonplaceholder.typicode.com/users"
+            );
+            const data = resp.data;
+            console.log(data);
+            setUsers(data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        return (
+          <div>
+            <button onClick={fetchAndUpdateData}>Fetch Data From Server</button>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3,1fr)",
+                gap: "10px",
+              }}
+            >
+              {users.map((user, i) => (
+                <UserCard key={i} {...user} />
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      let rootElement = document.getElementById("root");
+      ReactDOM.createRoot(rootElement).render(<App />);
+    </script>
+  </body>
+</html>

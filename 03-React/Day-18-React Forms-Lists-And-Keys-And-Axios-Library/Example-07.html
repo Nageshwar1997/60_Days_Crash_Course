@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example 07</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script type="text/babel">
+      function App() {
+        const [formState, setFormState] = React.useState({
+          name: "",
+          age: null,
+          country: "",
+          isMarried: false,
+        });
+
+        const [users, setUsers] = React.useState([]);
+
+        function handleInputChange(e) {
+          // console.log(e.target);
+          const { name, value, checked, type } = e.target;
+          // console.log(type);
+
+          setFormState((prev) => {
+            return {
+              ...prev,
+              [name]:
+                type == "checkbox"
+                  ? checked
+                  : type == "number"
+                  ? +value
+                  : value,
+            };
+          });
+        }
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          setUsers((prev) => [...prev, formState]);
+          console.log(formState);
+        }
+        return (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <label>
+                Name :{" "}
+                <input
+                  onChange={handleInputChange}
+                  type="text"
+                  name="name"
+                  value={formState.name}
+                  placeholder="Enter Name"
+                />
+              </label>
+              <br />
+              <label>
+                Age :{" "}
+                <input
+                  onChange={handleInputChange}
+                  type="number"
+                  name="age"
+                  value={formState.age}
+                  placeholder="Enter Age"
+                />
+              </label>
+              <br />
+              <label>
+                Country :{" "}
+                <select
+                  onChange={handleInputChange}
+                  name="country"
+                  value={formState.country}
+                >
+                  <option value="">Select Country</option>
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  <option value="Russia">Russia</option>
+                </select>
+              </label>
+              <br />
+              <label>
+                isMarried :{" "}
+                <input
+                  onChange={handleInputChange}
+                  type="checkbox"
+                  name="isMarried"
+                  checked={formState.isMarried}
+                />
+              </label>
+              <br />
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        );
+      }
+
+      let rootElement = document.getElementById("root");
+      ReactDOM.createRoot(rootElement).render(<App />);
+    </script>
+  </body>
+</html>

@@ -37,13 +37,18 @@
           image: "https://placehold.co/400",
         },
       ];
-
       function UserCard(props) {
         const { id, name, age, gender, email, image } = props;
 
         return (
-          <div>
-            <img src={image} alt={name} />
+          <div
+            style={{
+              padding: "5px",
+              border: "1px solid black",
+              textAlign: "center",
+            }}
+          >
+            <img width="200px" src={image} alt={name} />
             <p>Id: {id}</p>
             <p>Name: {name}</p>
             <p>Age: {age}</p>
@@ -62,8 +67,8 @@
               gap: "10px",
             }}
           >
-            {users.map((user) => (
-              <UserCard {...user} />
+            {users.map((user, i) => (
+              <UserCard key={i} {...user} />
             ))}
           </div>
         );
