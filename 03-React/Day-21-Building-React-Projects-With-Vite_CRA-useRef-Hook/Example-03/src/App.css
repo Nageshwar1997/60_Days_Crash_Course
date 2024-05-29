@@ -1,0 +1,30 @@
+body {
+  padding-bottom: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.header {
+  border: 1px solid black;
+  width: 100%;
+  background-color: aqua;
+  padding-bottom: 20px;
+}
+
+.footer {
+  border: 1px solid black;
+  width: 100%;
+  background-color: aqua;
+}
+
+.main {
+  border: 1px solid black;
+  width: 100%;
+  background-color: yellow;
+  text-align: center;
+  padding-bottom: 20px;
+}
