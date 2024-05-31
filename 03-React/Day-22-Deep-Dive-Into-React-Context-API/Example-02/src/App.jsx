@@ -6,12 +6,11 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 
 function App() {
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
   return (
     <>
       App
       <Navbar />
-      <Main userLoggedIn={userLoggedIn} />
+      <Main />
       <Footer />
     </>
   );

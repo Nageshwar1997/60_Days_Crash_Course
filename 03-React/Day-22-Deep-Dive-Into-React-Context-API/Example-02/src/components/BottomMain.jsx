@@ -1,10 +1,8 @@
-import React from "react";
-
 import BottomMainRight from "./BottomMainRight";
 import BottomMainLeft from "./BottomMainLeft";
 const BottomMain = () => {
   return (
-    <div>
+    <div className="bottomMain">
       BottomMain
       <BottomMainLeft />
       <BottomMainRight />

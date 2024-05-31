@@ -1,9 +1,17 @@
-import React from 'react'
-
+import { useContext } from "react";
+import { AuthContext } from "../main";
 const BottomMainRight = () => {
-  return (
-    <div>BottomMainRight</div>
-  )
-}
+  // const value = useContext(AuthContext);
+  // console.log("val", value); // OR
 
-export default BottomMainRight
+  const { isLoggedIn } = useContext(AuthContext);
+  console.log("In BottomMainRight isLoggedIn", isLoggedIn);
+
+  return (
+    <div className="bottomMainRight">BottomMainRight - {isLoggedIn.toString()}
+    <p>Hello Hi</p></div>
+  );
+
+};
+
+export default BottomMainRight;

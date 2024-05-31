@@ -1,7 +1,5 @@
-import React from "react";
-
 const TopMain = () => {
-  return <div>TopMain</div>;
+  return <div className="topMain">TopMain</div>;
 };
 
 export default TopMain;

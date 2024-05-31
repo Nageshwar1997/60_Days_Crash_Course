@@ -1,9 +1,5 @@
-import React from 'react'
-
 const BottomMainLeft = () => {
-  return (
-    <div>BottomMainLeft</div>
-  )
-}
+  return <div className="bottomMainLeft">BottomMainLeft</div>;
+};
 
-export default BottomMainLeft
+export default BottomMainLeft;
