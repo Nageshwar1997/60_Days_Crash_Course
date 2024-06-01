@@ -7,16 +7,16 @@ function UncontrolledInput() {
     console.log(inputRef.current.value);
   };
 
-    return (
-      <>
-        <input
-          ref={inputRef}
-          onChange={handleChange}
-          placeholder="Unclontrolled Input"
-            />
-            <br />
-      </>
-    );
+  return (
+    <>
+      <input
+        ref={inputRef}
+        onChange={handleChange}
+        placeholder="Unclontrolled Input"
+      />
+      <br />
+    </>
+  );
 }
 
 export default UncontrolledInput;
