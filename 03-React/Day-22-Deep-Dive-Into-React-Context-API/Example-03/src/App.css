@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+div {
+  margin: 10px;
+  padding: 10px;
+}
+#root {
+  border: 1px solid black;
+  background-color: lightblue;
+  margin: auto;
+  padding: 30px;
+}
+.navbar {
+  border: 1px solid red;
+  background-color: red;
+}
+.main {
+  border: 1px solid blue;
+  background-color: blue;
+}
+.footer {
+  border: 1px solid green;
+  background-color: green;
+}
+.topMain {
+  border: 1px dashed yellow;
+  background-color: yellow;
+}
+.bottomMain {
+  border: 1px dashed pink;
+  background-color: pink;
+}
+.bottomMainLeft {
+  border: 1px dashed purple;
+  background-color: purple;
+}
+.bottomMainRight {
+  border: 1px dashed lightgreen;
+  background-color: lightgreen;
+}
+
+.lightTheme {
+  background-color: lightcyan;
+  color: black;
+  & button{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.darkTheme {
+  background-color: darkgoldenrod;
+  color: white;
+  & button{
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+  }
+}
