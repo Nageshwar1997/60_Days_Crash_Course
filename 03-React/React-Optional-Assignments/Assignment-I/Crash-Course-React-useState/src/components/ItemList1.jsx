@@ -1,7 +1,7 @@
 // src/components/ItemList1.jsx
 import { useState } from "react";
 
-export default function ItemList1() {
+function ItemList1() {
   const [items, setItems] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -14,12 +14,15 @@ export default function ItemList1() {
 
   return (
     <div>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={addItem}>Add Item</button>
+      <span className="flex">
+        <input
+          type="text"
+          placeholder="Enter item"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button onClick={addItem}>Add Item</button>
+      </span>
       <ul>
         {items.map((item, index) => (
           <li key={index}>{item}</li>
@@ -28,3 +31,4 @@ export default function ItemList1() {
     </div>
   );
 }
+export default ItemList1;

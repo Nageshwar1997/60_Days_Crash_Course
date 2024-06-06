@@ -16,30 +16,32 @@ function ProfileUpdater() {
 
   return (
     <div>
-      <input
-        type="text"
-        name="firstName"
-        placeholder="First Name"
-        value={profile.firstName}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="lastName"
-        placeholder="Last Name"
-        value={profile.lastName}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="phoneNumber"
-        placeholder="Phone Number"
-        value={profile.phoneNumber}
-        onChange={handleInputChange}
-      />
       <p>First Name: {profile.firstName}</p>
       <p>Last Name: {profile.lastName}</p>
       <p>Phone Number: {profile.phoneNumber}</p>
+      <span className="flex" style={{ gap: "10px" }}>
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          value={profile.firstName}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={profile.lastName}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="phoneNumber"
+          placeholder="Phone Number"
+          value={profile.phoneNumber}
+          onChange={handleInputChange}
+        />
+      </span>
     </div>
   );
 }

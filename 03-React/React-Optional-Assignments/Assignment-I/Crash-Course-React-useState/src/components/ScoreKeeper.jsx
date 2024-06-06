@@ -8,20 +8,23 @@ function ScoreKeeper() {
   return (
     <div>
       <p>Score: {score}</p>
-      <button
-        onClick={() => {
-          /* complete the missing code */
-        }}
-      >
-        Increase by 5
-      </button>
-      <button
-        onClick={() => {
-          /* complete the missing code */
-        }}
-      >
-        Decrease by 5
-      </button>
+      <span style={{ display: "flex", gap: "10px" }}>
+        <button
+          onClick={() => {
+            setScore(score + 5);
+          }}
+        >
+          Increase by 5
+        </button>
+        <button
+          onClick={() => {
+            setScore(score - 5);
+          }}
+          disabled={score === 0}
+        >
+          Decrease by 5
+        </button>
+      </span>
     </div>
   );
 }

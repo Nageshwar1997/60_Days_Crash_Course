@@ -7,12 +7,13 @@ function TextInput1() {
 
   return (
     <div>
+      <p>Entered text: {text}</p>
       <input
         type="text"
         value={text}
+        placeholder="Enter text"
         onChange={(e) => setText(e.target.value)}
       />
-      <p>Entered text: {text}</p>
     </div>
   );
 }

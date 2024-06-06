@@ -7,14 +7,15 @@ function UsernameInput() {
 
   return (
     <div>
+      <p>Username: {username.toLowerCase()}</p>
       <input
         type="text"
+        placeholder="Enter Username"
         value={username}
         onChange={(e) => {
-          /* complete the missing code */
+          setUsername(e.target.value);
         }}
       />
-      <p>Username: {username.toLowerCase()}</p>
     </div>
   );
 }

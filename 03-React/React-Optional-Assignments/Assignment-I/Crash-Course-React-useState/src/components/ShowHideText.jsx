@@ -7,14 +7,14 @@ function ShowHideText() {
 
   return (
     <div>
+      {showText && <p>This is a toggled text!</p>}
       <button
         onClick={() => {
-          /* complete the missing code */
+          setShowText(!showText);
         }}
       >
-        Show/Hide Text
+        {showText ? "Hide Text" : "Show Text"}
       </button>
-      {showText && <p>This is a toggled text!</p>}
     </div>
   );
 }

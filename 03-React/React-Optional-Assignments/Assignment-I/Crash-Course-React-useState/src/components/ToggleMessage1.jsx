@@ -7,8 +7,8 @@ function ToggleMessage1() {
 
   return (
     <div>
-      <button onClick={() => setIsVisible(!isVisible)}>Toggle Message</button>
       {isVisible && <p>Hello, World!</p>}
+      <button onClick={() => setIsVisible(!isVisible)}>Toggle Message</button>
     </div>
   );
 }

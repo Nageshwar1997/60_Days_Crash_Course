@@ -19,19 +19,23 @@ function TaskManager() {
 
   return (
     <div>
-      <input
-        type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <button onClick={addTask}>Add Task</button>
-      <button
-        onClick={() => {
-          /*complete the missing code*/
-        }}
-      >
-        Remove First Task
-      </button>
+      <span className="flex">
+        <input
+          type="text"
+          placeholder="Enter task"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <button onClick={addTask}>Add Task</button>
+        <button
+          onClick={() => {
+            removeTask();
+          }}
+          disabled={tasks.length === 0}
+        >
+          Remove First Task
+        </button>
+      </span>
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>{task}</li>

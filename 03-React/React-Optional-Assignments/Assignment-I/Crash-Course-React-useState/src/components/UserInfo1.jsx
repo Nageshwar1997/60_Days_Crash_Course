@@ -15,22 +15,24 @@ function UserInfo1() {
 
   return (
     <div>
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={user.name}
-        onChange={handleInputChange}
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={user.email}
-        onChange={handleInputChange}
-      />
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
+      <span className="flex" style={{ gap: "10px" }}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={user.name}
+          onChange={handleInputChange}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={user.email}
+          onChange={handleInputChange}
+        />
+      </span>
     </div>
   );
 }

@@ -14,16 +14,36 @@ function App() {
   return (
     <>
       Uncomment to get particular component
-      {/* <Counter1 /> */}
-      {/* <UsernameInput /> */}
-      {/* <ProfileUpdater /> */}
-      {/* <ScoreKeeper /> */}
-      {/* <ShowHideText /> */}
-      {/* <TaskManager /> */}
-      {/* <TextInput1 /> */}
-      {/* <ToggleMessage1 /> */}
-      {/* <UserInfo1 /> */}
-      {/* <ItemList1 /> */}
+      <div>
+        <p className="heading">Problem 1: Number State</p>
+        <Counter1 />
+        <ScoreKeeper />
+      </div>
+      <div>
+        <p className="heading">Problem 2: String State</p>
+        <TextInput1 />
+        <hr />
+        <UsernameInput />
+      </div>
+      <div>
+        <p className="heading">Problem 3: Boolean State</p>
+        <span className="flex" style={{ gap: "10px" }}>
+          <ToggleMessage1 />
+          <hr />
+          <ShowHideText />
+        </span>
+      </div>
+      <div>
+        <p className="heading">Problem 4: Object State</p>
+        <UserInfo1 />
+        <hr />
+        <ProfileUpdater />
+      </div>
+      <div>
+        <p className="heading">Problem 5: Array State</p>
+        <ItemList1 />
+        <TaskManager />
+      </div>
     </>
   );
 }
