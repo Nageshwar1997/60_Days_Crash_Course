@@ -35,30 +35,70 @@ function App() {
   return (
     <>
       Uncomment to view particular component
-      {/* <Greeting1 /> */}
-      {/* <Welcome /> */}
-      {/* <ConditionalMessage1 isLoggedIn={true} /> */}
-      {/* <LoginMessage isLoggedIn={true} /> */}
-      {/* <ItemList1 /> */}
-      {/* <FruitList /> */}
-      {/* <ButtonClick1 /> */}
-      {/* <ToggleButton /> */}
-      {/* <Welcome1 name="Bruce Wayne" /> */}
-      {/* <Greeting message="I am Batman" /> */}
-      {/* <UserCard1 {...user1} /> */}
-      {/* <ProfileCard {...user2} /> */}
-      {/* <Card1>
-        <ComponentWrappedWithinCard1Component />
-      </Card1> */}
-      {/* <Container>
-        <ComponentWrapperWithinContainerComponent />
-      </Container> */}
-      {/* <UserList1 /> */}
-      {/* <ProductList /> */}
-      {/* <HighlightList1 /> */}
-      {/* <HighlightTaskList /> */}
-      {/* <NestedList1 /> */}
-      {/* <NestedTaskList /> */}
+      <div>
+        <p className="heading">Problem 1: Basic JSX</p>
+        <Greeting1 />
+        <Welcome />
+      </div>
+      <div>
+        <p className="heading">Problem 2: Conditional Rendering with JSX</p>
+        <ConditionalMessage1 isLoggedIn={true} />
+        <LoginMessage isLoggedIn={true} />
+      </div>
+      <div>
+        <p className="heading">Problem 3: Rendering Lists with JSX</p>
+        <span className="flex">
+          <ItemList1 />
+          <FruitList />
+        </span>
+      </div>
+      <div>
+        <p className="heading">Problem 4: Handling Events with JSX</p>
+        <span className="flex">
+          <ButtonClick1 />
+          <ToggleButton />
+        </span>
+      </div>
+      <div>
+        <p className="heading">Problem 5: Basic Component</p>
+        <Welcome1 name="Bruce Wayne" />
+        <Greeting message="I am Batman" />
+      </div>
+      <div>
+        <p className="heading">Problem 6: Component with Multiple Props</p>
+        <UserCard1 {...user1} />
+        <ProfileCard {...user2} />
+      </div>
+      <div>
+        <p className="heading">Problem 7: Component with Children</p>
+        <Card1>
+          <ComponentWrappedWithinCard1Component />
+        </Card1>
+        <Container>
+          <ComponentWrapperWithinContainerComponent />
+        </Container>
+      </div>
+      <div>
+        <p className="heading">Problem 8: Rendering List of Objects</p>
+        <span className="flex">
+          <UserList1 />
+          <ProductList />
+        </span>
+      </div>
+      <div>
+        <p className="heading">
+          Problem 9: Conditional Rendering and Conditional Styling in List
+        </p>
+        <span className="flex">
+          <HighlightList1 />
+          <HighlightTaskList />
+        </span>
+      </div>
+      <div>
+        <p className="heading">Problem 10: Rendering Nested Lists</p>
+        <NestedList1 />
+        <NestedTaskList />
+      </div>
     </>
   );
 }

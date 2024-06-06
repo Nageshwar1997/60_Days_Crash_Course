@@ -1,6 +1,6 @@
 // src/components/ToggleButton.jsx
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 function ToggleButton() {
   const [isOn, setIsOn] = useState(false);
@@ -11,7 +11,7 @@ function ToggleButton() {
 
   return (
     <div>
-      <p>{/*Complete missing code*/}</p>
+      <p style={{ color: isOn ? "green" : "red" }}>{isOn ? "ON" : "OFF"}</p>
       <button onClick={handleClick}>Toggle</button>
     </div>
   );

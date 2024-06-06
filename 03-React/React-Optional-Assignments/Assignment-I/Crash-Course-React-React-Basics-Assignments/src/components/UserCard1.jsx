@@ -1,12 +1,11 @@
+/* eslint-disable react/prop-types */
 // src/components/UserCard1.jsx
-
-import React from "react";
 
 function UserCard1({ name, email }) {
   return (
     <div>
-      <h3>{name}</h3>
-      <p>{email}</p>
+      <h3>Name : {name}</h3>
+      <p>Email : {email}</p>
     </div>
   );
 }

@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 // src/components/Welcome1.jsx
 
-import React from "react";
 
 function Welcome1({ name }) {
   return (

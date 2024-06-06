@@ -1,7 +1,5 @@
 // src/components/NestedTaskList.jsx
 
-import React from "react";
-
 function NestedTaskList() {
   const taskGroups = [
     {
@@ -14,13 +12,21 @@ function NestedTaskList() {
     },
   ];
   return (
-    <div>
+    <div
+      style={{
+        border: "1px solid black",
+        padding: "10px",
+        margin: "10px",
+        display: "flex",
+        gap: "50px",
+      }}
+    >
       {taskGroups.map((group, index) => (
         <div key={index}>
           <h4>{group.status}</h4>
           <ul>
             {group.tasks.map((task, idx) => (
-              <li key={idx}>{/* complete the missing code */}</li>
+              <li key={idx}>{task}</li>
             ))}
           </ul>
         </div>

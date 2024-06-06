@@ -1,7 +1,5 @@
 // src/components/NestedList1.jsx
 
-import React from "react";
-
 function NestedList1() {
   const categories = [
     {
@@ -14,7 +12,15 @@ function NestedList1() {
     },
   ];
   return (
-    <div>
+    <div
+      style={{
+        border: "1px solid black",
+        padding: "10px",
+        margin: "10px",
+        display: "flex",
+        gap: "50px",
+      }}
+    >
       {categories.map((category, index) => (
         <div key={index}>
           <h4>{category.name}</h4>

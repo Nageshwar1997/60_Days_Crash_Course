@@ -1,6 +1,6 @@
 // src/components/ButtonClick1.jsx
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 function ButtonClick1() {
   const [message, setMessage] = useState("Click the button");
