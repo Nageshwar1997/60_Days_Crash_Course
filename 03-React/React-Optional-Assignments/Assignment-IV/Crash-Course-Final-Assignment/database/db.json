@@ -1,0 +1,108 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "title": "Navbar Feature - Login",
+      "description": "Build a Login button within Navbar",
+      "assignee": "Nageshwar",
+      "status": "pending",
+      "priority": 2
+    },
+    {
+      "id": 2,
+      "title": "User Authentication - Signin",
+      "description": "Implement user signin functionality with validation",
+      "assignee": "Dhanashree",
+      "status": "pending",
+      "priority": 6
+    },
+    {
+      "id": 3,
+      "title": "Database Optimization",
+      "description": "Optimize database queries for faster performance",
+      "assignee": "Suyog",
+      "status": "completed",
+      "priority": 8
+    },
+    {
+      "id": 4,
+      "title": "UI Design - Dashboard",
+      "description": "Design the dashboard UI based on the wireframes",
+      "assignee": "Dhanashree",
+      "status": "progress",
+      "priority": 6
+    },
+    {
+      "id": 5,
+      "title": "API Integration - Payment Gateway",
+      "description": "Integrate payment gateway API for transactions",
+      "assignee": "Kiran",
+      "status": "pending",
+      "priority": 9
+    },
+    {
+      "id": 6,
+      "title": "Bug Fix - Login Issue",
+      "description": "Fix the login issue where users are not redirected correctly",
+      "assignee": "Rutuja",
+      "status": "completed",
+      "priority": 3
+    },
+    {
+      "id": 7,
+      "title": "Feature Implementation - User Profile",
+      "description": "Develop user profile page with edit functionality",
+      "assignee": "Sonali",
+      "status": "progress",
+      "priority": 4
+    },
+    {
+      "id": 8,
+      "title": "Code Review - Module A",
+      "description": "Conduct code review for module A and provide feedback",
+      "assignee": "Nageshwar",
+      "status": "pending",
+      "priority": 2
+    },
+    {
+      "id": 9,
+      "title": "Testing - Unit Tests for Services",
+      "description": "Write unit tests for all services",
+      "assignee": "Manjusha",
+      "status": "progress",
+      "priority": 1
+    },
+    {
+      "id": 10,
+      "title": "Performance Monitoring",
+      "description": "Set up performance monitoring tools",
+      "assignee": "Suyog",
+      "status": "completed",
+      "priority": 7
+    },
+    {
+      "title": "Bug fix - Performance Monitoring",
+      "description": "Set up performance monitoring tools and update",
+      "priority": 6,
+      "status": "pending",
+      "assignee": "Manjusha",
+      "id": 11
+    },
+    {
+      "title": "Create Footer Logo",
+      "description": "Create company logo on Footer",
+      "priority": 2,
+      "status": "progress",
+      "assignee": "Dhanashree",
+      "id": 12
+    },
+    {
+      "title": "Navbar Logo",
+      "description": "Create Navbar Logo",
+      "priority": 6,
+      "status": "progress",
+      "assignee": "Sonali",
+      "id": 13
+    }
+  ]
+}
