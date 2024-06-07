@@ -69,9 +69,12 @@ function Users() {
       </div>
       <h1>List of users</h1>
       {/* Map through the users array and render a User component for each user */}
-      {users?.map((user) => (
-        <User {...user} key={user.id} />
-      ))}
+
+      <div id="users">
+        {users?.map((user) => (
+          <User {...user} key={user.id} />
+        ))}
+      </div>
     </div>
   );
 }

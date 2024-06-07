@@ -20,7 +20,9 @@ function Posts() {
       });
 
       setTotalPages(Math.ceil(Number(res?.headers["x-total-count"]) / 10));
-      /*Complete the missing code*/
+      setPosts(res.data)
+      setLoading(false);
+      setError(false)
     } catch (error) {
       setError(true);
       setLoading(false);
@@ -28,7 +30,7 @@ function Posts() {
   }
 
   useEffect(() => {
-    /*Complete the missing code*/
+    fetchAndUpdateData(page)
   }, [page]);
 
   if (loading) {
