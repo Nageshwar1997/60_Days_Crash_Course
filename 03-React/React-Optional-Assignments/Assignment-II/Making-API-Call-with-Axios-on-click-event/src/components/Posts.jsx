@@ -10,14 +10,20 @@ function Posts() {
   const [error, setError] = useState(false);
 
   async function fetchAndUpdateData() {
+    setLoading(true);
     try {
       {
-        /*Complete the missing code*/
+        let response = await axios({
+          method: "get",
+          url: "https://jsonplaceholder.typicode.com/posts",
+        });
+        setPosts(response.data);
+        setLoading(false);
+        setError(false);
       }
     } catch (error) {
-      {
-        /*Complete the missing code*/
-      }
+      setLoading(false);
+      setError(true);
     }
   }
 
@@ -29,13 +35,19 @@ function Posts() {
     return <ErrorIndicator />;
   }
 
+  console.log(posts);
+
   return (
-    <div>
+    <div style={{marginTop:"20px"}}>
       <h1>List of Posts</h1>
       <button onClick={fetchAndUpdateData}>
         Click to display list of posts
       </button>
-      {/*Complete the missing code*/}
+      <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:"10px"}}>
+        {posts.map((post) => (
+          <Post key={post.id} {...post} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -34,7 +34,7 @@ function Users() {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: "20px" }}>
       <h1>List of users</h1>
       <button onClick={fetchAndUpdateData}>
         Click to display list of users
