@@ -1,11 +1,22 @@
+/* eslint-disable react/prop-types */
 function User({ avatar, email, first_name, last_name }) {
   return (
-    <div>
+    <div
+      style={{
+        border: "1px solid black",
+        padding: "10px",
+        marginBottom: "10px",
+      }}
+    >
       <img src={avatar} alt={first_name} />
       <div>
-        Name : {first_name} {last_name}
+        <strong>Name : </strong>
+        {first_name} {last_name}
       </div>
-      <div>Email : {email}</div>
+      <div>
+        <strong>Email : </strong>
+        {email}
+      </div>
     </div>
   );
 }
