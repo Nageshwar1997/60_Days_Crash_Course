@@ -58,69 +58,50 @@
 
 ## Module 03. React
 
-### Day 14. [React, ReactDOM Basics With JSX And Babel.]()
+### Day 14. [React, ReactDOM Basics With JSX And Babel.](./03-React/Day-14-React-And-ReactDOM-Basics-With-JSX-And-Babel/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+- #### [Assignments](./03-React/Day-14-React-And-ReactDOM-Basics-With-JSX-And-Babel/Assignments/)
+- #### [Problems](./03-React/Day-14-React-And-ReactDOM-Basics-With-JSX-And-Babel/)
 
-### Day 15. [Understanding Components Props And Virtual DOM.]()
+### Day 15. [Understanding Components Props And Virtual DOM.](./03-React/Day-15-Understanding-Components-Props-And-Virtual-DOM/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+- #### [Assignments](./03-React/Day-15-Understanding-Components-Props-And-Virtual-DOM/Assignments/)
+- #### [Problems](./03-React/Day-15-Understanding-Components-Props-And-Virtual-DOM/)
 
-### Day 16. [Problem Solving Class I.]()
+### Day 16. [Problem Solving Class I.](./03-React/Day-16-Problem-Solving-Class-I/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+- #### [Assignments](./03-React/Day-16-Problem-Solving-Class-I/)
 
-### Day 17. []()
+### Day 17. [State Management Techniques & useState Hook.](./03-React/Day-17-State-Management-Techniques-and-useState-Hook/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+- #### [Assignments](./03-React/Day-17-State-Management-Techniques-and-useState-Hook/Assignments/)
+- #### [Problems](./03-React/Day-17-State-Management-Techniques-and-useState-Hook/)
 
-### Day 18. [React Forms Lists, Keys And Axios Library.]()
+### Day 18. [React Forms Lists, Keys And Axios Library.](./03-React/Day-18-React-Forms-Lists-And-Keys-And-Axios-Library/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+- #### [Assignments](./03-React/Day-18-React-Forms-Lists-And-Keys-And-Axios-Library/Assignments/)
+- #### [Problems](./03-React/Day-18-React-Forms-Lists-And-Keys-And-Axios-Library/)
 
-### Day 19. []()
+### Day 19. [Component Lifecycle Side Effects & useEffect Hook.](./03-React/Day-19-Component-Lifecycle-Side-Effects-And-useEffect-Hook/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+- #### [Assignments](./03-React/Day-19-Component-Lifecycle-Side-Effects-And-useEffect-Hook/Assignments/)
+- #### [Problems](./03-React/Day-19-Component-Lifecycle-Side-Effects-And-useEffect-Hook/)
 
-### Day 20. [Problem Solving Class II.]()
+### Day 20. [Problem Solving Class II.](./03-React/Day-20-Problem-Solving-Class-II/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+### Day 21. [Building React Projects With Vite_CRA useRef Hook.](./03-React/Day-21-Building-React-Projects-With-Vite_CRA-useRef-Hook/)
 
-### Day 21. []()
+- #### [Assignments](./03-React/Day-21-Building-React-Projects-With-Vite_CRA-useRef-Hook/Assignments/)
+- #### [Problems](./03-React/Day-21-Building-React-Projects-With-Vite_CRA-useRef-Hook/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+### Day 22. [Deep Dive Into React Context API.](./03-React/Day-22-Deep-Dive-Into-React-Context-API/)
 
-### Day 22. []()
+### Day 23. [Exploring Routing in React and understanding environment variables.](./03-React/Day-23-Exploring-Routing-in-React-and-understanding-environment-variables/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+### Day 24. [Problem Solving Class III.](./03-React/Day-24-Problem-Solving-Class-III/)
 
-### Day 23. []()
+### Day 25. [Styling in React with Chakra UI.](./03-React/Day-25-Styling-in-React-with-Chakra-UI/)
 
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
-
-### Day 24. [Problem Solving Class III.]()
-
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
-
-### Day 25. []()
-
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
-
-### Day 26. [Problem Solving Class IV.]()
-
-- #### [Assignments](./03-React)
-- #### [Problems](./03-React)
+### Day 26. [Problem Solving Class IV.](./03-React/Day-26-Problem-Solving-Class-IV/)
 
 ### Day 27 - Day 30. [React Optional Assignments](./03-React/React-Optional-Assignments/)
