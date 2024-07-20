@@ -1,6 +1,6 @@
 # What I learned From This 60 Days Crash Course
 
-## 1. HTML & CSS
+## Module 01. HTML & CSS
 
 ### Day 01. [Building With HTML & CSS.](./01-HTML_And_CSS/Day-01-Building-With-HTML-CSS)
 
@@ -12,7 +12,7 @@
 - #### [Assignments](./01-HTML_And_CSS/Day-02-Responsive-Design_Flexbox-Grid-And-CSS-Styling/Assignments)
 - #### [Problems](./01-HTML_And_CSS/Day-02-Responsive-Design_Flexbox-Grid-And-CSS-Styling)
 
-## 1. JavaScript
+## Module 02. JavaScript
 
 ### Day 03. [JavaScript Essentials.](./02-JavaScript/Day-03-JavaScript-Essentials/)
 
