@@ -105,3 +105,23 @@
 ### Day 26. [Problem Solving Class IV.](./03-React/Day-26-Problem-Solving-Class-IV/)
 
 ### Day 27 - Day 30. [React Optional Assignments](./03-React/React-Optional-Assignments/)
+
+## Module 04. DSA (Data Structures & Algorithms)
+
+### Lecture 1. [Masterclass on Complexity Analysis.](./04-DSA/00-Masterclass/01-Complexity-Analysis/)
+
+### Lecture 2. [Masterclass on Binary Search.](./04-DSA/00-Masterclass/02-Binary-Search/)
+
+### Lecture 3. [Masterclass on Sorting Algorithms.](./04-DSA/00-Masterclass/03-Sorting-Algorithms/)
+
+### Lecture 4. [Input Taking in JS & 2D Arrays.](./04-DSA/01-InputTaking_In_JS-And-2D_Array/)
+
+### Lecture 5. [Time & Space Complexity.](./04-DSA/02-Time_and_Space-Complexity/)
+
+### Lecture 6. [Arrays & Strings.](./04-DSA/03-Array_and_Strings/)
+
+### Lecture 7. [Key Value Pair.](./04-DSA/04-Key-Value-Pair/)
+
+### Lecture 8. [Sorting Algorithms.](./04-DSA/05-Sorting-Algorithms/)
+
+### Lecture 9. [Binary Search.](./04-DSA/06-Binary-Search/)
